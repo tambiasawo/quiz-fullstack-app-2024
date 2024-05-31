@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    background-color: #242528;
+    color: #92969f;
+    height: 100%;
+  }
+}
+
+@layer components {
+  .form-control-sign-in {
+    @apply rounded-xl outline-none py-1.5 px-3 bg-slate-200 text-black;
+  }
+  .active-field {
+    @apply text-black;
+  }
+  .main-box {
+    @apply rounded-lg bg-[#37373e] p-4 flex flex-col gap-3;
+  }
+}
