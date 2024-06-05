@@ -31,7 +31,7 @@ export const QuickQuizController = async (req, res, next) => {
   }&category=${getCategory(category)}&type=${type || ""}&difficulty=${
     difficulty || ""
   }`;
-
+  console.log({ REQUEST_URL });
   try {
     const response = await fetch(REQUEST_URL);
     const data = await response.json();
@@ -63,21 +63,22 @@ export const QuickQuizController = async (req, res, next) => {
         return res.status(404).json({
           message: "No Results: Could not return results.",
           success: false,
-          results: [],
+          data: { results: [], count: 0 },
         });
       case 2:
         return res.status(400).json({
           message:
             "Invalid Parameter Contains an invalid parameter: Arguements passed in aren't valid",
           success: false,
-          results: [],
+          data: { results: [], count: 0 },
         });
+        //  https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple
       case 5:
         return res.status(409).json({
           message:
             "Rate Limit: Too many requests have occurred. Each IP can only access the API once every 5 seconds",
           success: false,
-          results: [],
+          data: { results: [], count: 0 },
         });
       default:
         break;
