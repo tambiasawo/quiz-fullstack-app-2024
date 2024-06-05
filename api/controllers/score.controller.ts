@@ -1,10 +1,17 @@
 import Score from "../models/Score.model";
 
 export const SaveScoreController = async (req, res, next) => {
-  const { userId, type, category, score, difficulty } = req.body;
-  console.log({ userId, type, category, score, difficulty });
+  const { userId, type, category, score, difficulty, questionsCount } =
+    req.body;
   try {
-    const newScore = new Score({ userId, type, category, score, difficulty });
+    const newScore = new Score({
+      userId,
+      type,
+      category,
+      score,
+      difficulty,
+      questionsCount,
+    });
     const addedScore = await Score.create(newScore);
     if (!addedScore) {
       throw new Error(
@@ -18,17 +25,19 @@ export const SaveScoreController = async (req, res, next) => {
 };
 
 export const GetScoresController = async (req, res, next) => {
-  const { id } = req.params;
+  const id = req.params;
+  console.log("id");
   try {
-    const scores = await Score.findById(id);
-    console.log({ id });
+    const scores = await Score.find({ userId: req.params.id });
     if (!scores) {
       return res.status(404).json({
         success: false,
         message: "No score found. You haven't taken any test yet",
+        scores: [],
       });
     }
     console.log({ scores });
+    return res.status(200).json({ success: true, results: scores });
   } catch (err) {
     next(err);
   }
