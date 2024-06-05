@@ -32,7 +32,6 @@ export const SignInController = async (req, res, next) => {
           process.env.PRIVATE_KEY as string
         );
         const { password, ...rest } = foundUser._doc;
-
         return res
           .cookie("access_token", token, {
             httpOnly: true,
@@ -49,6 +48,7 @@ export const SignInController = async (req, res, next) => {
 
 export const SignOutController = (req, res, next) => {
   const token = req.cookies.access_token;
+  console.log("here now");
   if (!token) return;
   return res
     .clearCookie("access_token")
