@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
-export interface AuthState {
+export interface QuestionState {
   answeredQuestions: Array<{
     id: string;
     answer: string;
@@ -10,7 +10,7 @@ export interface AuthState {
   questionsAnsweredCount: number;
 }
 
-const initialState: AuthState = {
+const initialState: QuestionState = {
   answeredQuestions: [],
   questionsAnsweredCount: 0,
 };
@@ -40,10 +40,14 @@ export const questionSlice = createSlice({
         state.questionsAnsweredCount = state.questionsAnsweredCount + 1;
       }
     },
+    reset: (state) => {
+      state.answeredQuestions = [];
+      state.questionsAnsweredCount = 0;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { chooseAnswer } = questionSlice.actions;
+export const { chooseAnswer, reset } = questionSlice.actions;
 
 export default questionSlice.reducer;
