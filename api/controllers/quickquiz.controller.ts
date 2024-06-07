@@ -31,7 +31,7 @@ export const QuickQuizController = async (req, res, next) => {
   }&category=${getCategory(category)}&type=${type || ""}&difficulty=${
     difficulty || ""
   }`;
-  console.log({ REQUEST_URL });
+
   try {
     const response = await fetch(REQUEST_URL);
     const data = await response.json();
@@ -72,7 +72,6 @@ export const QuickQuizController = async (req, res, next) => {
           success: false,
           data: { results: [], count: 0 },
         });
-        //  https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple
       case 5:
         return res.status(409).json({
           message:
