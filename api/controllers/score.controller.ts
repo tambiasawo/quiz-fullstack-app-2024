@@ -25,10 +25,10 @@ export const SaveScoreController = async (req, res, next) => {
 };
 
 export const GetScoresController = async (req, res, next) => {
-  const id = req.params;
-  console.log("id");
   try {
-    const scores = await Score.find({ userId: req.params.id });
+    const scores = await Score.find({ userId: req.params.id }).sort({
+      createdAt: -1,
+    });
     if (!scores) {
       return res.status(404).json({
         success: false,
@@ -36,7 +36,6 @@ export const GetScoresController = async (req, res, next) => {
         scores: [],
       });
     }
-    console.log({ scores });
     return res.status(200).json({ success: true, results: scores });
   } catch (err) {
     next(err);
