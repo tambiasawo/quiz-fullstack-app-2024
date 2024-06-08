@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { scoreColumns, LeaderboardColumns } from "../utils/columns";
 import ScoreSummary from "../components/ScoreSummary";
-import { useGetScores } from "../hooks/useSaveScore";
+import { useGetScores } from "../hooks/useScores";
 import { GoTasklist } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
 import React from "react";
