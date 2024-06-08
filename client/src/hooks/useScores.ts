@@ -34,7 +34,6 @@ const saveQuizScore = async (params: Params | any) => {
       }
     );
     const data = await response.json();
-    console.log(data);
   } catch (e) {
     console.log(e);
   }
@@ -67,6 +66,9 @@ const useSaveScore = () => {
 const useGetScores = (id: string | undefined) => {
   const { data, isFetching, error, isPending } = useQuery({
     queryKey: ["scores", id],
+
+    staleTime: 1000 * 60 * 5, // 5 minutes
+
     queryFn: () => getScores(id as string),
   });
 
