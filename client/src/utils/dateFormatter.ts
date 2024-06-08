@@ -10,3 +10,31 @@ const dateFormatter = (date: string) => {
 };
 
 export default dateFormatter;
+
+export const monthDayDateFormatter = (date: string) => {
+  const d = new Date(date);
+  const options: {
+    month: "long" | "numeric" | "2-digit" | "short" | "narrow" | undefined;
+    day: "numeric" | "2-digit" | undefined;
+  } = { month: "long", day: "numeric" };
+  const formattedDate = d.toLocaleDateString("en-US", options);
+
+  const optionswithTime: {
+    month: "long" | "numeric" | "2-digit" | "short" | "narrow" | undefined;
+    day: "numeric" | "2-digit" | undefined;
+    hour: "numeric" | "2-digit" | undefined;
+    minute: "numeric" | "2-digit" | undefined;
+    hour12: boolean;
+  } = {
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  };
+  const formattedDateWithTIme = d
+    .toLocaleString("en-US", optionswithTime)
+    .replace(",", "");
+
+  return { formattedDate, formattedDateWithTIme };
+};
