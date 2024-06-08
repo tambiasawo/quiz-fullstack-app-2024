@@ -1,6 +1,6 @@
 import React from "react";
 import dateFormatter from "../utils/dateFormatter";
-import { Scores } from "../hooks/useSaveScore";
+import { Scores } from "../hooks/useScores";
 import { Skeleton } from "@mui/material";
 
 const ScoreSummary = ({
