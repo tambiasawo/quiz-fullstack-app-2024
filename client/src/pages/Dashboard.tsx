@@ -1,60 +1,80 @@
-import React from "react";
-import { GrScorecard } from "react-icons/gr";
 import Table from "../components/Table";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+import { scoreColumns, LeaderboardColumns } from "../utils/columns";
+import ScoreSummary from "../components/ScoreSummary";
+import { useGetScores } from "../hooks/useSaveScore";
+import { GoTasklist } from "react-icons/go";
+import { FaCalendarAlt } from "react-icons/fa";
+import React from "react";
+
+const actionColumn = {
+  field: "action",
+  headerName: "Action",
+  minWidth: 120,
+  renderCell: () => {
+    return (
+      <a href="#" className="underline">
+        View
+      </a>
+    );
+  },
+};
 
 const Dashboard = () => {
   const user = useSelector((state: RootState) => state.auth.user);
-  console.log({ user });
+
+  const { data: { results: scores } = { results: [] }, isFetching } =
+    useGetScores(user?._id);
+
+  const scoreCols = React.useMemo(() => {
+    return [...scoreColumns, actionColumn];
+  }, []);
   return (
-    <div className="grid-cols-1 md:grid md:grid-cols-12 ">
-      <div className=" col-span-12 py-3">
-        <main className=" flex flex-col gap-5">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="main-box bg-[#a6abff]">
-              <div className="flex gap-4 items-center">
-                <GrScorecard
-                  size={48}
-                  className="border rounded-xl p-2 bg-white text-black"
-                />{" "}
-                <h2 className="font-semibold text-black text-xl">
-                  Most Recent Score
-                </h2>
+    <div>
+      <h1 className="text-white text-xl">Welcome, {user?.name}! </h1>
+      <div className="grid-cols-1 md:grid md:grid-cols-12 ">
+        <div className=" col-span-12 py-3">
+          <main className=" flex flex-col gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <ScoreSummary scores={scores} isFetching={isFetching} />{" "}
+              <div className="main-box">
+                <div className="flex flex-col space-y-7">
+                  <div className="flex gap-4 items-center">
+                    <GoTasklist size={28} className="text-white" />{" "}
+                    <h2 className=" text-white text-xl">Quizzes Taken</h2>
+                  </div>
+                  <div className="max-w-lg mx-auto flex flex-col gap-1 items-center">
+                    <div className="bg-[#fe9d73]  w-[190px] h-[190px] rounded-full flex justify-center items-center p-3">
+                      <h1 className="text-black text-6xl text-center ">
+                        {scores?.length || 0}
+                      </h1>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <img
-                className="mx-auto"
-                width="128"
-                height="128"
-                src="/assets/success.png"
-                alt="most recent score"
-              />
-              <div className="">
-                <p className="text-slate-700">
-                  <span className="text-black"> +14%</span> Since last week
-                </p>
-                <h1 className="text-3xl text-black font-bold">97.9%</h1>
+              <div className="main-box">
+                <div className="flex gap-4 items-center">
+                  <FaCalendarAlt size={28} className="text-white" />
+                  <h2 className=" text-white text-xl">Upcoming Quizzes</h2>
+                </div>
               </div>
             </div>
 
-            <div className="main-box">
-              <div className="flex gap-4 items-center">
-                <GrScorecard
-                  size={48}
-                  className="border rounded-xl p-2 bg-white text-black"
-                />{" "}
-                <h2 className="font-semibold text-black text-xl">
-                  Score Report
-                </h2>
+            <div className=" grid grid-cols-1 md:grid-cols-2 gap-4 ">
+              <div className="col-span-1">
+                <h1 className="text-white text-xl">Results</h1>
+                <div className="bg-[#37373e]">
+                  <Table columns={scoreCols} rows={scores || []} />
+                </div>
+              </div>
+              <div>
+                <h1 className="text-white text-xl">LeaderBoard</h1>
+                <Table columns={LeaderboardColumns} rows={[]} />
               </div>
             </div>
-            <div className="main-box">3</div>
-          </div>
-
-          <div className="bg-[#37373e]">
-            <Table />
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
     </div>
   );
