@@ -1,7 +1,7 @@
 import { GridColDef } from "@mui/x-data-grid";
 import dateFormatter from "./dateFormatter";
 
-export const columns: GridColDef[] = [
+export const scoreColumns: GridColDef[] = [
   {
     field: "createdAt",
     headerName: "Date",
@@ -31,6 +31,15 @@ export const columns: GridColDef[] = [
     field: "status",
     headerName: "Status",
     minWidth: 120,
-    valueGetter: (params) => (params.row.percentage > 50 ? "Passed" : "Failed"),
+    valueGetter: (params) => {
+      const percentage = params.row.score / params.row.questionsCount;
+      return percentage > 0.5 ? "Passed" : "Failed";
+    },
   },
+];
+
+export const LeaderboardColumns: GridColDef[] = [
+  { field: "name", headerName: "Name", minWidth: 200 },
+  { field: "category", headerName: "Category", minWidth: 200 },
+  { field: "score", headerName: "Score", minWidth: 120 },
 ];
