@@ -11,7 +11,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { RootState } from "../../store/store";
-import { Scores, useGetScores } from "../../hooks/useSaveScore";
+import { Scores, useGetScores } from "../../hooks/useScores";
 import { monthDayDateFormatter } from "../../utils/dateFormatter";
 import Skeleton from "@mui/material/Skeleton";
 

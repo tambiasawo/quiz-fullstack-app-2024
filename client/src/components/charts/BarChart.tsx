@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { ScoreResponseData, useGetScores } from "../../hooks/useSaveScore";
+import { ScoreResponseData, useGetScores } from "../../hooks/useScores";
 import {
   BarChart as Chart,
   Bar,
