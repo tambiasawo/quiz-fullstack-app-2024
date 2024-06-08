@@ -15,9 +15,10 @@ import Quiz from "./pages/Quiz.tsx";
 import { SignIn } from "./pages/SignIn.tsx";
 import { SignUp } from "./pages/SignUp.tsx";
 import { persistStore } from "redux-persist";
-import SecureRoute from "./pages/SecureRoute.tsx";
-
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 let persistor = persistStore(store);
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   { path: "/sign-in", element: <SignIn /> },
@@ -41,32 +42,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </PersistGate>
   </Provider>
 );
-
-/*
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    errorElement: <ErrorPage />,
-    children: [
-      { element: <Dashboard />, index: true },
-      {
-        path: "/profile",
-        element: <SecureRoute />,
-        children: [{ path: "/profile", element: <Profile /> }],
-      },
-      { path: "/sign-in", element: <SignIn /> },
-      { path: "/sign-up", element: <SignUp /> },
-      { path: "/quizzes", element: <Quizzes /> },
-      { path: "/results", element: <Results /> },
-      { path: "/faq", element: <FAQ /> },
-
-      { path: "/quiz/:quiz_type", element: <Quiz /> },
-    ],
-  },
-]);
-*/
