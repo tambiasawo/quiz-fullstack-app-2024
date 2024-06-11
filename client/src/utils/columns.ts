@@ -38,8 +38,8 @@ export const scoreColumns: GridColDef[] = [
   },
 ];
 
-export const LeaderboardColumns: GridColDef[] = [
-  { field: "name", headerName: "Name", minWidth: 200 },
+export const leaderboardColumns: GridColDef[] = [
+  { field: "username", headerName: "Username", minWidth: 200 },
   { field: "category", headerName: "Category", minWidth: 200 },
   { field: "score", headerName: "Score", minWidth: 120 },
 ];

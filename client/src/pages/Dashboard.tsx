@@ -1,9 +1,9 @@
 import Table from "../components/Table";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { scoreColumns, LeaderboardColumns } from "../utils/columns";
+import { scoreColumns, leaderboardColumns } from "../utils/columns";
 import ScoreSummary from "../components/ScoreSummary";
-import { useGetScores } from "../hooks/useScores";
+import { useGetScores, useGetTopScores } from "../hooks/useScores";
 import { GoTasklist } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
 import React from "react";
@@ -27,10 +27,16 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { data: { results: scores } = { results: [] }, isFetching } =
     useGetScores(user?._id);
+  const {
+    data: { results: topScores } = { results: [] },
+    isFetching: isFetchingTopScores,
+  } = useGetTopScores();
 
   const scoreCols = React.useMemo(() => {
     return [...scoreColumns, actionColumn];
   }, []);
+
+  console.log({ scores });
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -68,6 +74,7 @@ const Dashboard = () => {
                 <div className="flex gap-4 items-center">
                   <FaCalendarAlt size={28} className="text-white" />
                   <h2 className=" text-white text-xl">Recommended Quizzes</h2>
+                  <ul>{}</ul>
                 </div>
               </div>
             </div>
@@ -76,12 +83,20 @@ const Dashboard = () => {
               <div className="col-span-1">
                 <h1 className="text-white text-xl">Results</h1>
                 <div className="bg-[#37373e]">
-                  <Table columns={scoreCols} rows={scores || []} />
+                  <Table
+                    columns={scoreCols}
+                    rows={scores || []}
+                    isLoading={isFetching}
+                  />
                 </div>
               </div>
               <div>
                 <h1 className="text-white text-xl">LeaderBoard</h1>
-                <Table columns={LeaderboardColumns} rows={[]} />
+                <Table
+                  columns={leaderboardColumns}
+                  rows={topScores}
+                  isLoading={isFetchingTopScores}
+                />
               </div>
             </div>
           </main>
