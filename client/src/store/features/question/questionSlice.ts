@@ -32,7 +32,6 @@ export const questionSlice = createSlice({
         };
         temp[existingQuestionIndex] = newAnswer;
         state.answeredQuestions = temp;
-        state.questionsAnsweredCount = state.questionsAnsweredCount + 1;
         return;
       } else {
         temp.push(action.payload);
