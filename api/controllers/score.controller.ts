@@ -1,13 +1,5 @@
 import Score from "../models/Score.model";
-import { Document, ObjectId } from "mongoose";
 
-// User Interface
-interface IUser extends Document {
-  username: string;
-  // other fields
-}
-
-// TopScorers Type
 type TopScorers = {
   _id: string;
   category: string;
@@ -78,12 +70,11 @@ export const GetTopScoresController = async (req, res, next) => {
       score: score.score,
       questionsCount: score.questionsCount,
       category: score.category,
-      username: score.userId["username"], // assumes userId is populated and has a name field
+      username: score.userId["username"],
     }));
 
     const topScorers = mappedScorers.reduce((acc: TopScorers[], userScore) => {
       const { score, category, questionsCount, _id, username } = userScore;
-      //const { username } = userId;
       const existingIndex = acc.findIndex((item) => item.category === category);
       let percentScore = (score / questionsCount) * 100;
       if (existingIndex == -1) {
