@@ -7,6 +7,7 @@ import { useGetScores } from "../hooks/useScores";
 import { GoTasklist } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const actionColumn = {
   field: "action",
@@ -23,7 +24,7 @@ const actionColumn = {
 
 const Dashboard = () => {
   const user = useSelector((state: RootState) => state.auth.user);
-
+  const navigate = useNavigate();
   const { data: { results: scores } = { results: [] }, isFetching } =
     useGetScores(user?._id);
 
@@ -32,7 +33,17 @@ const Dashboard = () => {
   }, []);
   return (
     <div>
-      <h1 className="text-white text-xl">Welcome, {user?.name}! </h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-white text-xl">Welcome, {user?.name}! </h1>
+        <button
+          onClick={() => {
+            navigate("/quiz/quick-quiz");
+          }}
+          className=" text-center bg-[#fe9d73] rounded-xl px-2 py-2 text-md hover:opacity-[.9] text-black"
+        >
+          Quick Quiz
+        </button>{" "}
+      </div>
       <div className="grid-cols-1 md:grid md:grid-cols-12 ">
         <div className=" col-span-12 py-3">
           <main className=" flex flex-col gap-5">
@@ -56,7 +67,7 @@ const Dashboard = () => {
               <div className="main-box">
                 <div className="flex gap-4 items-center">
                   <FaCalendarAlt size={28} className="text-white" />
-                  <h2 className=" text-white text-xl">Upcoming Quizzes</h2>
+                  <h2 className=" text-white text-xl">Recommended Quizzes</h2>
                 </div>
               </div>
             </div>
