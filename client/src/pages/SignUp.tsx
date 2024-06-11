@@ -68,7 +68,7 @@ export const SignUp = () => {
     }
   };
 
-  const handleIconColorChange = (e) => {
+  const handleIconColorChange = (e: React.FocusEvent<any>) => {
     if (e.type === "focus") {
       e.target.nextElementSibling.classList.add("active-field");
     } else {

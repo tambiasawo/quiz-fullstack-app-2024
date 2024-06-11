@@ -1,10 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface ResponseData {
-  results: Question[];
-  count: number;
-  page: number;
-}
 
 export interface Question {
   id: string;

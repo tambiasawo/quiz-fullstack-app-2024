@@ -25,15 +25,11 @@ export type ScoreResponseData = {
 };
 const saveQuizScore = async (params: Params | any) => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/scores/save-score`,
-      {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(params),
-      }
-    );
-    const data = await response.json();
+    await fetch(`http://localhost:3000/api/scores/save-score`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(params),
+    });
   } catch (e) {
     console.log(e);
   }
@@ -43,6 +39,18 @@ const getScores = async (_id: string) => {
   try {
     const response = await fetch(
       `http://localhost:3000/api/scores/get-scores/${_id}`
+    );
+    const responseData = await response.json();
+    return responseData;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const getTopScores = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/api/scores/get-top-scores/`
     );
     const responseData = await response.json();
     return responseData;
@@ -74,4 +82,17 @@ const useGetScores = (id: string | undefined) => {
 
   return { data, isFetching, error, isPending };
 };
-export { useGetScores, useSaveScore };
+
+const useGetTopScores = () => {
+  const { data, isFetching, error, isPending } = useQuery({
+    queryKey: ["scores"],
+
+    staleTime: 1000 * 60 * 5, // 5 minutes
+
+    queryFn: () => getTopScores(),
+  });
+
+  return { data, isFetching, error, isPending };
+};
+
+export { useGetScores, useSaveScore, useGetTopScores };

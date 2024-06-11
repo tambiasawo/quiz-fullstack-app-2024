@@ -1,4 +1,3 @@
-import React from "react";
 import { FaCheck } from "react-icons/fa6";
 import { IoCloseSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";

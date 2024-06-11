@@ -4,7 +4,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { PiExam } from "react-icons/pi";
 import { TbHelpCircle } from "react-icons/tb";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { signOut } from "../store/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -36,7 +36,6 @@ export const navItems = [
 ];
 
 export const Navbar = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleSignOut = async () => {
