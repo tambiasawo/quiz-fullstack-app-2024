@@ -8,7 +8,7 @@ import DataTable from "../components/Table";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { scoreColumns as cols } from "../utils/columns";
-import { useGetScores } from "../hooks/useSaveScore";
+import { useGetScores } from "../hooks/useScores";
 import ScoreSummary from "../components/ScoreSummary";
 
 const actionColumn = {
