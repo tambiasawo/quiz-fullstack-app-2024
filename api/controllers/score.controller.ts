@@ -41,3 +41,60 @@ export const GetScoresController = async (req, res, next) => {
     next(err);
   }
 };
+
+export const GetTopScoresController = async (req, res, next) => {
+  try {
+    const scores = await Score.find(
+      {},
+      { _id: 1, name: 1, score: 1, questionsCount: 1, category: 1 }
+    ).populate("userId", "username");
+
+    if (!scores) {
+      return res.status(404).json({
+        success: false,
+        message: "No scores found.",
+        scores: [],
+      });
+    }
+    type TopScorers = {
+      _id: string;
+      category: string;
+      questionsCount: number;
+      score: number;
+      userId: {
+        username: string;
+      };
+    };
+    const topScorers = scores.reduce((acc: TopScorers[], userScore) => {
+      const {
+        score,
+        category,
+        questionsCount,
+        _id,
+        userId: { username },
+      } = userScore;
+      const existingIndex = acc.findIndex((item) => item.category === category);
+      let percentScore = (score / questionsCount) * 100;
+      if (existingIndex == -1) {
+        acc.push({
+          _id,
+          score: percentScore,
+          questionsCount,
+          category,
+          username,
+        });
+      } else {
+        const existingScore = acc[existingIndex];
+        if (existingScore.score < percentScore) {
+          acc[existingIndex].score = percentScore;
+        }
+      }
+
+      return acc;
+    }, []);
+
+    return res.status(200).json({ success: true, results: topScorers });
+  } catch (err) {
+    next(err);
+  }
+};
