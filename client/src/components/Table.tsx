@@ -7,6 +7,7 @@ interface Props {
   rows: Data<Rows>[];
   columns: GridColDef[];
   title?: string;
+  isLoading?: boolean;
 }
 export interface Rows {
   id: number;
@@ -19,7 +20,7 @@ export interface Rows {
   lastlogin: Date;
 }
 
-const DataTable = ({ rows, columns }: Props) => {
+const DataTable = ({ rows, columns,isLoading }: Props) => {
   let updatedTableColumns = [...columns];
 
   return (
@@ -46,6 +47,7 @@ const DataTable = ({ rows, columns }: Props) => {
             },
           },
         }}
+        loading={isLoading}
         //pageSizeOptions={[10]}
       />
     </Box>
