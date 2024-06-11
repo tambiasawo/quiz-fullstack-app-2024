@@ -1,4 +1,3 @@
-import React from "react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { HiOutlineDocumentReport } from "react-icons/hi";
 import { IoLogOutOutline } from "react-icons/io5";
@@ -34,10 +33,6 @@ export const navItems = [
     icon: TbHelpCircle,
     title: "Help/FAQ",
   },
-  /*  {
-    icon: MdOutlineSettings,
-    title: "Settings",
-  }, */
 ];
 
 export const Navbar = () => {
@@ -66,16 +61,7 @@ export const Navbar = () => {
           // className="w-14 h-14 object-cover"
         />
       </div>
-      <div className="mx-auto w-[60%] mt-7">
-        <button
-          onClick={() => {
-            navigate("/quiz/quick-quiz");
-          }}
-          className=" mt-3 text-center bg-[#fe9d73] rounded-xl px-4 py-3 text-md hover:opacity-[.9] text-black"
-        >
-          Quick Quiz
-        </button>{" "}
-      </div>
+      
       <ul className="pt-5 list-none m-0">
         {navItems.map((item) => (
           <li
