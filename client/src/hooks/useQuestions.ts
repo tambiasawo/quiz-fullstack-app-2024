@@ -16,10 +16,10 @@ export interface Question {
   difficulty: string;
 }
 
-const getQuizQuestions = async (quiz_type: string, page: number) => {
+const getQuizQuestions = async (quiz_type: string) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/quiz/?${quiz_type}&page=${page}`
+      `http://localhost:3000/api/quiz/?${quiz_type}`
     );
     const responseData = await response.json();
 
@@ -30,11 +30,11 @@ const getQuizQuestions = async (quiz_type: string, page: number) => {
   }
 };
 
-const useGetQuestions = (quiz_type: string | undefined, page: number) => {
+const useGetQuestions = (quiz_type: string | undefined) => {
   const { data, isFetching, error, isPending } = useQuery({
-    queryKey: ["questions", page],
+    queryKey: ["questions"],
     staleTime: 60 * 1000 * 10,
-    queryFn: () => getQuizQuestions(quiz_type as string, page),
+    queryFn: () => getQuizQuestions(quiz_type as string),
   });
 
   return { data, isFetching, error, isPending };
