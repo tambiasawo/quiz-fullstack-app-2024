@@ -58,7 +58,7 @@ const QuizInterface = ({
     const quizParamsArray = urlParams?.split("&");
     const requestBody: Record<string, string> = {};
 
-    for (let param of quizParamsArray as []) {
+    for (let param of quizParamsArray as any[]) {
       let paramName = param.split("=");
       requestBody[paramName[0]] = paramName[1] ? paramName[1] : "Any";
     }
