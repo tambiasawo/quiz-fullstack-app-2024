@@ -1,4 +1,3 @@
-import React from "react";
 import QuizBox from "../components/QuizBox";
 
 const Quizzes = () => {
