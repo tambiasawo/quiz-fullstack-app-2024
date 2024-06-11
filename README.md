@@ -1,1 +1,1 @@
-# mern-fullstack-app-2024
+# quiz-fullstack-app-2024
