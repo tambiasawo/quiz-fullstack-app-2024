@@ -1,4 +1,5 @@
 import mongoose, { Schema } from "mongoose";
+import User from "./User.model";
 
 const scoreSchema = new Schema(
   {
@@ -6,6 +7,7 @@ const scoreSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       unique: false,
+      ref: User,
     },
     questionsCount: { type: Number, required: true },
     score: { type: Number, required: true },
