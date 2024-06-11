@@ -21,11 +21,11 @@ function getCategory(chosenCategory: string) {
   }
   return category;
 }
-//use arr.slice() to get questionsfrom 0 to 5 for pagination
 
 export const QuickQuizController = async (req, res, next) => {
   const { amount, difficulty, category, type } = req.query;
-  let page = 1;
+  const page = Number(req.query.page);
+
   const REQUEST_URL = `${process.env.BASE_URL}/api.php?amount=${
     amount ? Number(amount) : 5
   }&category=${getCategory(category)}&type=${type || ""}&difficulty=${
@@ -35,22 +35,22 @@ export const QuickQuizController = async (req, res, next) => {
   try {
     const response = await fetch(REQUEST_URL);
     const data = await response.json();
+    const results =
+      data.results?.map((question) => {
+        let randomIndex = Math.floor(
+          Math.random() * question.incorrect_answers.length + 1
+        );
+        let answers = [...question.incorrect_answers];
+        answers.splice(randomIndex, 0, question.correct_answer);
+        let id = crypto.randomUUID();
 
-    const results = data.results?.map((question) => {
-      let randomIndex = Math.floor(
-        Math.random() * question.incorrect_answers.length + 1
-      );
-      let answers = [...question.incorrect_answers];
-      answers.splice(randomIndex, 0, question.correct_answer);
-      let id = crypto.randomUUID();
-
-      return {
-        id,
-        question: question.question,
-        answers,
-        correctAnswer: question.correct_answer,
-      };
-    });
+        return {
+          id,
+          question: question.question,
+          answers,
+          correctAnswer: question.correct_answer,
+        };
+      }) || [];
 
     switch (data.response_code) {
       case 0:
