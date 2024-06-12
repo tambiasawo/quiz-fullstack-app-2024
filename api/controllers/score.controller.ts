@@ -9,7 +9,7 @@ type TopScorers = {
 };
 
 export const SaveScoreController = async (req, res, next) => {
-  const { userId, type, category, score, difficulty, questionsCount } =
+  const { userId, type, category, score, difficulty, questionsCount, marksId } =
     req.body;
   try {
     const newScore = new Score({
@@ -19,6 +19,7 @@ export const SaveScoreController = async (req, res, next) => {
       score,
       difficulty,
       questionsCount,
+      marksId,
     });
     const addedScore = await Score.create(newScore);
     if (!addedScore) {
