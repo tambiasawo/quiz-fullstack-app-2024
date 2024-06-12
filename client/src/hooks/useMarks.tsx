@@ -5,9 +5,10 @@ const saveMarks = async (params: {
   userId?: string;
   marks: Marks[];
   scoreCount: number;
+  marksId: string;
 }) => {
   try {
-    if (!params.userId) {
+    if (!params.userId || !params.marksId) {
       throw new Error();
     }
     await fetch(`http://localhost:3000/api/marks/save-marks`, {

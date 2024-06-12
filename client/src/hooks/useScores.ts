@@ -18,6 +18,7 @@ export type Scores = {
   type: string;
   updatedAt: string;
   userId: string;
+  marksId: string;
 };
 export type ScoreResponseData = {
   results: Scores[];
