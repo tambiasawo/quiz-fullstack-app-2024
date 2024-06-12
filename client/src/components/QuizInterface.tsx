@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import { chooseAnswer, reset } from "../store/features/question/questionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store/store";
@@ -6,6 +7,7 @@ import QuizResult from "./QuizResult";
 import { Question } from "../hooks/useQuestions";
 import { useSaveScore } from "../hooks/useScores";
 import { Skeleton } from "@mui/material";
+import useMarks from "../hooks/useMarks";
 
 interface ResponseData {
   data: Question[];
@@ -13,7 +15,12 @@ interface ResponseData {
   error: Error | null;
   count: number;
 }
-
+export type Marks = {
+  id: string;
+  answer: string;
+  question: string;
+  correctAnswer: string;
+};
 const QuizInterface = ({
   responseData,
   urlParams,
@@ -37,11 +44,54 @@ const QuizInterface = ({
   const [totalScore, setTotalScore] = React.useState<undefined | number>();
 
   const { mutation } = useSaveScore();
+  const { mutation: saveMarks } = useMarks();
   let totalQuestionsCount = count || 0;
-  const handleChange = (id: string, answer: string, correctAnswer: string) => {
-    dispatch(chooseAnswer({ id, answer, correctAnswer }));
+
+  const handleChange = (
+    id: string,
+    question: string,
+    answer: string,
+    correctAnswer: string
+  ) => {
+    dispatch(chooseAnswer({ id, question, answer, correctAnswer }));
   };
 
+  const handleSaveScore = async (
+    scoreCount: number,
+    requestBody: Record<string, string>,
+    marksId: string
+  ) => {
+    mutation.mutateAsync(
+      urlParams === "quick-quiz"
+        ? {
+            category: "Any",
+            type: "Any",
+            difficulty: "Any",
+            userId,
+            score: scoreCount,
+            questionsCount: totalQuestionsCount,
+            marksId,
+          }
+        : {
+            ...requestBody,
+            userId,
+            score: scoreCount,
+            questionsCount: totalQuestionsCount,
+            marksId,
+          }
+    );
+  };
+  console.log({ userId });
+  const handleSaveMarks = async (
+    userId: string | undefined,
+    marks: Marks[],
+    scoreCount: number,
+    marksId: string
+  ) => {
+    saveMarks.mutateAsync({ userId, marks, scoreCount, marksId });
+  };
+
+  //console.log(page * 5 < count, page, count);
   const handleSubmitQuiz = async () => {
     console.log(totalQuestionsCount, { questionsAnsweredCount });
 
@@ -50,6 +100,8 @@ const QuizInterface = ({
     }
 
     let scoreCount = 0;
+    let marksId = uuidv4();
+
     for (let answeredQuestion of answeredQuestions) {
       if (answeredQuestion.answer === answeredQuestion.correctAnswer) {
         scoreCount++;
@@ -62,24 +114,10 @@ const QuizInterface = ({
       let paramName = param.split("=");
       requestBody[paramName[0]] = paramName[1] ? paramName[1] : "Any";
     }
-    mutation.mutateAsync(
-      urlParams === "quick-quiz"
-        ? {
-            category: "Any",
-            type: "Any",
-            difficulty: "Any",
-            userId,
-            score: scoreCount,
-            questionsCount: totalQuestionsCount,
-          }
-        : {
-            ...requestBody,
-            userId,
-            score: scoreCount,
-            questionsCount: totalQuestionsCount,
-          }
-    );
+    await handleSaveScore(scoreCount, requestBody, marksId);
+    await handleSaveMarks(userId, answeredQuestions, scoreCount, marksId);
     setTotalScore(scoreCount);
+    dispatch(reset());
   };
 
   React.useEffect(() => {
@@ -125,6 +163,7 @@ const QuizInterface = ({
                           onChange={() =>
                             handleChange(
                               question.id,
+                              question.question,
                               answer,
                               question.correctAnswer
                             )
@@ -154,15 +193,15 @@ const QuizInterface = ({
               Prev
             </button>
           )}{" "}
-          {page * 5 < count && (
+          {
             <button
               onClick={nextPageHandler}
               className="text-center disabled:bg-[#b8907e] bg-[#fe9d73] rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
-              disabled={page * 5 === count}
+              //disabled={page * 5 === count}
             >
               Next
             </button>
-          )}
+          }
         </div>
         <div className="pt-5 pb-3">
           {page * 5 === count && (
