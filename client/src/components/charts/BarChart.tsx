@@ -43,7 +43,6 @@ function BarChart() {
       return acc;
     }, []);
 
-  console.log({ groupedData });
   if (isFetching)
     return (
       <Skeleton
