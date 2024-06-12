@@ -1,7 +1,7 @@
 import React from "react";
 import dateFormatter from "../utils/dateFormatter";
 import { Scores } from "../hooks/useScores";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Tooltip } from "@mui/material";
 
 const ScoreSummary = ({
   scores,
@@ -69,6 +69,7 @@ const ScoreSummary = ({
       />
     );
   }
+  console.log({ displayScore });
   return (
     <div className="main-box bg-[#a6abff]  gap-[30px]">
       <div className="flex gap-2 items-center">
@@ -79,6 +80,7 @@ const ScoreSummary = ({
             setScoreType(e.target.value);
           }}
           className="py-1 text-sm rounded-md outline-none text-black"
+          disabled={scores.length === 0}
         >
           <option value="recent">Most Recent</option>
           <option value="best">Best</option>
@@ -87,14 +89,24 @@ const ScoreSummary = ({
       </div>
       <div className="max-w-lg mx-auto flex flex-col gap-1 items-center">
         <div className="bg-[#fe9d73]  w-[190px] h-[190px] rounded-full flex justify-center items-center p-3">
-          <h1 className="text-black text-6xl text-center ">
-            {`${displayScore.value + "%" || "--"}`}
-          </h1>
+          {displayScore.value ? (
+            <h1 className="text-black text-6xl text-center ">
+              {displayScore.value + "%"}
+            </h1>
+          ) : (
+            <Tooltip title="No Quiz Taken yet. Take a Quiz Now" placement="top">
+              <p className="text-6xl text-black cursor-default">-- </p>
+            </Tooltip>
+          )}
         </div>
       </div>
       <div className="flex justify-between items-center mt-0 w-full text-black">
-        <h6 className="text-black">{displayScore.category}</h6>
-        <h6 className="text-black">{displayScore.date}</h6>
+        {displayScore.category && displayScore.date && (
+          <>
+            <h6 className="text-black">{displayScore.category}</h6>
+            <h6 className="text-black">{displayScore.date}</h6>
+          </>
+        )}
       </div>
     </div>
   );
