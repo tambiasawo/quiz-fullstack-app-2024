@@ -3,6 +3,7 @@ dotenv.config();
 import cors from "cors";
 import QuizRouter from "./routes/quiz.route";
 import AuthRouter from "./routes/auth.route";
+import MarksRouter from "./routes/marks.route";
 import express from "express";
 import dbConnect from "./utils/dbConnect";
 import errorHandler from "./utils/errorHandler";
@@ -19,6 +20,8 @@ app.use(cookieParser());
 app.use(`/api/quiz`, QuizRouter);
 app.use(`/api/auth`, AuthRouter);
 app.use("/api/scores", ScoreRouter);
+app.use("/api/marks", MarksRouter);
+
 app.use(errorHandler);
 app.get("/", (req, res) => {
   return res.send("hello");
