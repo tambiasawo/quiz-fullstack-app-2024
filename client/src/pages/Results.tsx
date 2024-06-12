@@ -10,34 +10,54 @@ import { RootState } from "../store/store";
 import { scoreColumns as cols } from "../utils/columns";
 import { useGetScores } from "../hooks/useScores";
 import ScoreSummary from "../components/ScoreSummary";
+import Modal from "@mui/material/Modal";
+import { Box } from "@mui/material";
 
-const actionColumn = {
-  field: "action",
-  headerName: "Action",
-  minWidth: 120,
-  renderCell: () => {
-    return (
-      <a href="#" className="underline">
-        View
-      </a>
-    );
-  },
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 700,
+  bgcolor: "background.paper",
+  //border: "2px solid #000",
+  //boxShadow: 24,
+  p: 4,
 };
 
 const Results = () => {
   const userId = useSelector((state: RootState) => state.auth.user?._id);
   const [chartType, setChartType] = React.useState("bar");
+  const [open, setOpen] = React.useState(false);
 
   const { data: { results: scores } = { results: [] }, isFetching } =
     useGetScores(userId);
 
-  const columns = React.useMemo(() => {
-    return [...cols, actionColumn];
-  }, []);
+  const actionColumn = {
+    field: "action",
+    headerName: "Action",
+    minWidth: 120,
+    renderCell: () => {
+      return (
+        <a
+          href="#"
+          className="underline text-blue-400"
+          onClick={() => setOpen(true)}
+        >
+          View
+        </a>
+      );
+    },
+  };
 
   const handleChangeChart = React.useCallback(() => {
     setChartType((prev) => (prev === "line" ? "bar" : "line"));
   }, [chartType, setChartType]);
+
+  const handleClose = () => setOpen(false);
+  const columns = React.useMemo(() => {
+    return [...cols, actionColumn];
+  }, []);
 
   return (
     <div className="space-y-7">
@@ -79,6 +99,20 @@ const Results = () => {
       <div className="bg-[#37373e]">
         <DataTable rows={scores || []} columns={columns} />
       </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={{...style}}>
+          <h2 id="parent-modal-title">Text in a modal</h2>
+          <p id="parent-modal-description">
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </p>
+        </Box>
+      </Modal>
     </div>
   );
 };
