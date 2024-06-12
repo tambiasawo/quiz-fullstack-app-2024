@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import User from "./User.model";
+import Mark from "./Marks.model";
 
 const scoreSchema = new Schema(
   {
@@ -8,6 +9,12 @@ const scoreSchema = new Schema(
       required: true,
       unique: false,
       ref: User,
+    },
+    marksId: {
+      type: String,
+      required: true,
+      unique: false,
+      ref: Mark,
     },
     questionsCount: { type: Number, required: true },
     score: { type: Number, required: true },
