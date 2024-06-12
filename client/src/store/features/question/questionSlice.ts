@@ -5,6 +5,7 @@ export interface QuestionState {
   answeredQuestions: Array<{
     id: string;
     answer: string;
+    question: string;
     correctAnswer: string;
   }>;
   questionsAnsweredCount: number;
