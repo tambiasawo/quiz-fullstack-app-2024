@@ -1,5 +1,5 @@
 import express from "express";
-import { QuickQuizController } from "../controllers/QuickQuiz.controller";
+import { QuickQuizController } from "../controllers/quickquiz.controller";
 
 const Router = express.Router();
 

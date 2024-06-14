@@ -4,7 +4,6 @@ import {
   SignOutController,
   SignUpController,
 } from "../controllers/auth.controller";
-import verifyToken from "../utils/verifyToken";
 
 const Router = express.Router();
 
