@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 
+export interface Mark {
+  id: string;
+  answer: string;
+  question: string;
+  correctAnswer: string;
+}
 export interface QuestionState {
-  answeredQuestions: Array<{
-    id: string;
-    answer: string;
-    question: string;
-    correctAnswer: string;
-  }>;
+  answeredQuestions: Array<Mark>;
   questionsAnsweredCount: number;
 }
 
