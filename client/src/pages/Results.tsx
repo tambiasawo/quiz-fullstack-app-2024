@@ -1,48 +1,84 @@
 import React from "react";
-import BarChart from "../components/charts/BarChart";
 import { AiOutlineLineChart } from "react-icons/ai";
 import { AiOutlineBarChart } from "react-icons/ai";
 
-import LineChart from "../components/charts/LineChart";
-import DataTable from "../components/Table";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
+
+import DataTable from "../components/Table";
+import BarChart from "../components/charts/BarChart";
+import LineChart from "../components/charts/LineChart";
 import { scoreColumns as cols } from "../utils/columns";
 import { useGetScores } from "../hooks/useScores";
 import ScoreSummary from "../components/ScoreSummary";
-import Modal from "@mui/material/Modal";
-import { Box } from "@mui/material";
 
-const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  bgcolor: "background.paper",
-  //border: "2px solid #000",
-  //boxShadow: 24,
-  p: 4,
-};
+import { useGetMark } from "../hooks/useMarks";
+import ScoreBreakdownModal from "../components/ScoreBreakdownModal";
+import { Mark } from "../store/features/question/questionSlice";
+
+interface ModalData {
+  category: string;
+  score: number;
+  questionCount: number;
+}
+interface GetMarkResponse {
+  data: { quizMarks: Mark[] };
+  isFetching: boolean;
+}
+
+interface TableRow {
+  row: {
+    marksId: string;
+    score: number;
+    questionsCount: number;
+    category: string;
+  };
+}
 
 const Results = () => {
   const userId = useSelector((state: RootState) => state.auth.user?._id);
   const [chartType, setChartType] = React.useState("bar");
   const [open, setOpen] = React.useState(false);
+  const [markId, setMarkId] = React.useState("");
+  const quizData = React.useRef<ModalData>({
+    score: 0,
+    questionCount: 0,
+    category: "",
+  });
 
   const { data: { results: scores } = { results: [] }, isFetching } =
     useGetScores(userId);
+  const { data: quizMarks, isFetching: isFetchingMarks }: GetMarkResponse =
+    useGetMark(markId);
+
+  const handleOpen = (
+    markId: string,
+    score: number,
+    questionCount: number,
+    category: string
+  ) => {
+    setMarkId(markId);
+    setOpen(true);
+    quizData.current = { score, questionCount, category };
+  };
 
   const actionColumn = {
     field: "action",
     headerName: "Action",
     minWidth: 120,
-    renderCell: () => {
+    renderCell: (params: TableRow) => {
       return (
         <a
           href="#"
           className="underline text-blue-400"
-          onClick={() => setOpen(true)}
+          onClick={() =>
+            handleOpen(
+              params.row.marksId,
+              params.row.score,
+              params.row.questionsCount,
+              params.row.category
+            )
+          }
         >
           View
         </a>
@@ -55,6 +91,7 @@ const Results = () => {
   }, [chartType, setChartType]);
 
   const handleClose = () => setOpen(false);
+
   const columns = React.useMemo(() => {
     return [...cols, actionColumn];
   }, []);
@@ -99,20 +136,17 @@ const Results = () => {
       <div className="bg-[#37373e]">
         <DataTable rows={scores || []} columns={columns} />
       </div>
-
-      <Modal
+      <ScoreBreakdownModal
+        isFetching={isFetchingMarks}
         open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={{...style}}>
-          <h2 id="parent-modal-title">Text in a modal</h2>
-          <p id="parent-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-        </Box>
-      </Modal>
+        handleClose={handleClose}
+        quizData={{
+          quizMarks,
+          score: quizData.current.score,
+          category: quizData.current.category,
+          questionCount: quizData.current.questionCount,
+        }}
+      />
     </div>
   );
 };
