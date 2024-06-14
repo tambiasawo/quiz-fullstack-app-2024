@@ -76,7 +76,7 @@ const useGetScores = (id: string | undefined) => {
   const { data, isFetching, error, isPending } = useQuery({
     queryKey: ["scores", id],
 
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    //staleTime: 1000 * 60 * 5, // 5 minutes
 
     queryFn: () => getScores(id as string),
   });
@@ -88,7 +88,7 @@ const useGetTopScores = () => {
   const { data, isFetching, error, isPending } = useQuery({
     queryKey: ["scores"],
 
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    //staleTime: 1000 * 60 * 5, // 5 minutes
 
     queryFn: () => getTopScores(),
   });
