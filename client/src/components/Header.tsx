@@ -15,6 +15,12 @@ const Header = () => {
 
   const getHeader = () => {
     if (pathname === "/") return "Dashboard";
+    if (pathname.substring(1, 5) === "quiz" && pathname.length > 8) {
+      const splittedPathname = pathname.split("/category");
+      const ampersandIndex = splittedPathname[1]?.indexOf("&");
+      const breadcrumb = splittedPathname[1].substring(1, ampersandIndex);
+      return decodeURIComponent(`Quiz > ${breadcrumb}`);
+    }
     return pathname[1].toLocaleUpperCase() + pathname.substring(2);
   };
 
