@@ -1,13 +1,11 @@
 import Mark from "../models/Marks.model";
 
 export const SaveMarksController = async (req, res, next) => {
-  const { marks, userId, scoreCount, marksId } = req.body;
+  const { marks, marksId } = req.body;
 
   try {
     const newMark = new Mark({
       marks,
-      userId,
-      scoreCount,
       marksId,
     });
     const addedMark = await Mark.create(newMark);
@@ -22,17 +20,22 @@ export const SaveMarksController = async (req, res, next) => {
   }
 };
 
-export const GetMarksController = async (req, res, next) => {
+export const GetMarkController = async (req, res, next) => {
   try {
-    const marks = await Mark.find({ userId: req.params.id });
-    if (!marks) {
+    const mark = await Mark.find(
+      { marksId: req.params.id },
+      {
+        marks: 1,
+      }
+    );
+    if (!mark) {
       return res.status(404).json({
         success: false,
-        message: "No score found. You haven't taken any test yet",
-        scores: [],
+        message: "No marks found. You haven't taken any test yet",
+        results: [],
       });
     }
-    return res.status(200).json({ success: true, results: marks });
+    return res.status(200).json({ success: true, results: mark });
   } catch (err) {
     next(err);
   }
