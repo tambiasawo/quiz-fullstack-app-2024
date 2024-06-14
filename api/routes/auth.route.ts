@@ -3,7 +3,7 @@ import {
   SignInController,
   SignOutController,
   SignUpController,
-} from "../controllers/Auth.controller";
+} from "../controllers/auth.controller";
 import verifyToken from "../utils/verifyToken";
 
 const Router = express.Router();
