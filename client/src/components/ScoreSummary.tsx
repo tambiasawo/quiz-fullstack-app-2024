@@ -69,7 +69,6 @@ const ScoreSummary = ({
       />
     );
   }
-  console.log({ displayScore });
   return (
     <div className="main-box bg-[#a6abff]  gap-[30px]">
       <div className="flex gap-2 items-center">
