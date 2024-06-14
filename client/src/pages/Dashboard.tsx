@@ -37,6 +37,7 @@ const Dashboard = () => {
   }, []);
 
   console.log({ scores });
+  /*if scores.length > 5 */
   return (
     <div>
       <div className="flex justify-between items-center">
