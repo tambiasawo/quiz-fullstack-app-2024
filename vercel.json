@@ -2,10 +2,5 @@
   "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
   "framework": "vite",
-  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index.ts" }],
-  "functions": {
-    "api/index.ts": {
-      "runtime": "nodejs16.x"
-    }
-  }
+  "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index.ts" }]
 }
