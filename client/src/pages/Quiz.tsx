@@ -38,7 +38,8 @@ const Quiz = () => {
   } = useGetQuestions(quiz_type);
 
   const paginatedResults = data.results?.slice((page - 1) * 5, page * 5);
-
+  console.log("results ", { data });
+  console.log({ page }, (page - 1) * 5, page * 5, { paginatedResults });
   return (
     <QuizInterface
       responseData={{

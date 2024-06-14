@@ -51,7 +51,7 @@ export const QuickQuizController = async (req, res, next) => {
           correctAnswer: question.correct_answer,
         };
       }) || [];
-
+    console.log({ results });
     switch (data.response_code) {
       case 0:
         return res.status(200).json({
