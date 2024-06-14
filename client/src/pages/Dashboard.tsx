@@ -6,21 +6,7 @@ import ScoreSummary from "../components/ScoreSummary";
 import { useGetScores, useGetTopScores } from "../hooks/useScores";
 import { GoTasklist } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
-import React from "react";
 import { useNavigate } from "react-router-dom";
-
-const actionColumn = {
-  field: "action",
-  headerName: "Action",
-  minWidth: 120,
-  renderCell: () => {
-    return (
-      <a href="#" className="underline">
-        View
-      </a>
-    );
-  },
-};
 
 const Dashboard = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -32,12 +18,6 @@ const Dashboard = () => {
     isFetching: isFetchingTopScores,
   } = useGetTopScores();
 
-  const scoreCols = React.useMemo(() => {
-    return [...scoreColumns, actionColumn];
-  }, []);
-
-  console.log({ scores });
-  /*if scores.length > 5 */
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -85,7 +65,7 @@ const Dashboard = () => {
                 <h1 className="text-white text-xl">Results</h1>
                 <div className="bg-[#37373e]">
                   <Table
-                    columns={scoreCols}
+                    columns={scoreColumns}
                     rows={scores || []}
                     isLoading={isFetching}
                   />
