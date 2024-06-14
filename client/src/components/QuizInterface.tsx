@@ -7,7 +7,7 @@ import QuizResult from "./QuizResult";
 import { Question } from "../hooks/useQuestions";
 import { useSaveScore } from "../hooks/useScores";
 import { Skeleton } from "@mui/material";
-import useMarks from "../hooks/useMarks";
+import { useSaveMarks } from "../hooks/useMarks";
 
 interface ResponseData {
   data: Question[];
@@ -44,7 +44,7 @@ const QuizInterface = ({
   const [totalScore, setTotalScore] = React.useState<undefined | number>();
 
   const { mutation } = useSaveScore();
-  const { mutation: saveMarks } = useMarks();
+  const { mutation: saveMarks } = useSaveMarks();
   let totalQuestionsCount = count || 0;
 
   const handleChange = (
@@ -81,14 +81,8 @@ const QuizInterface = ({
           }
     );
   };
-  console.log({ userId });
-  const handleSaveMarks = async (
-    userId: string | undefined,
-    marks: Marks[],
-    scoreCount: number,
-    marksId: string
-  ) => {
-    saveMarks.mutateAsync({ userId, marks, scoreCount, marksId });
+  const handleSaveMarks = async (marks: Marks[], marksId: string) => {
+    saveMarks.mutateAsync({ marks, marksId });
   };
 
   //console.log(page * 5 < count, page, count);
@@ -115,7 +109,7 @@ const QuizInterface = ({
       requestBody[paramName[0]] = paramName[1] ? paramName[1] : "Any";
     }
     await handleSaveScore(scoreCount, requestBody, marksId);
-    await handleSaveMarks(userId, answeredQuestions, scoreCount, marksId);
+    await handleSaveMarks(answeredQuestions, marksId);
     setTotalScore(scoreCount);
     dispatch(reset());
   };
