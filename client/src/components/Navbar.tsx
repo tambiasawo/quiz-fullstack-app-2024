@@ -69,7 +69,7 @@ export const Navbar = () => {
           >
             <Link to={item.path}>
               <span className="flex gap-4 items-center">
-                <item.icon /> <h3>{item.title}</h3>
+                <item.icon /> <h3 className="text-md">{item.title}</h3>
               </span>
             </Link>
           </li>
