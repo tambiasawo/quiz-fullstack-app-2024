@@ -3,18 +3,11 @@ import User from "./User.model";
 
 const marksSchema = new Schema(
   {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      unique: false,
-      ref: User,
-    },
     marksId: {
       type: String,
       required: true,
       unique: true,
     },
-    scoreCount: { type: Number, required: true },
     marks: { type: Array, required: true },
   },
   { timestamps: true }
