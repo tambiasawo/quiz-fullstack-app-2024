@@ -9,7 +9,6 @@ import dbConnect from "./utils/dbConnect";
 import errorHandler from "./utils/errorHandler";
 import cookieParser from "cookie-parser";
 import ScoreRouter from "./routes/score.route";
-import path from "path";
 
 dbConnect();
 
@@ -23,8 +22,8 @@ app.use(
     credentials: true,
   })
 );
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, "/client/dist")));
+//const __dirname = path.resolve();
+//app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -34,14 +33,11 @@ app.use("/api/scores", ScoreRouter);
 app.use("/api/marks", MarksRouter);
 
 app.use(errorHandler);
-app.get("/", (req, res) => {
-  return res.send("hello");
-});
 
-app.use("*", (req, res) => {
+/* app.use("*", (req, res) => {
   //route that doenst match our provided routes
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+}); */
 
 app.listen(PORT, () => {
   console.log("listening on port " + PORT);
