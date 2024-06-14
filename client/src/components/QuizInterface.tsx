@@ -40,6 +40,7 @@ const QuizInterface = ({
     (state: RootState) => state.question
   );
   const { isFetching, data, error, count } = responseData;
+  const parser = new DOMParser();
 
   const [totalScore, setTotalScore] = React.useState<undefined | number>();
 
@@ -139,7 +140,14 @@ const QuizInterface = ({
             return (
               <div className="mb-7" key={question.id}>
                 <h2 className="text-lg">
-                  {data.length * page - 4 + index + ". " + question.question}
+                  {data.length * page -
+                    4 +
+                    index +
+                    ". " +
+                    parser.parseFromString(
+                      decodeURIComponent(question.question),
+                      "text/html"
+                    ).body.textContent}
                 </h2>
                 <div className="px-4">
                   {question.answers.map((answer) => {
@@ -167,7 +175,12 @@ const QuizInterface = ({
                           htmlFor={answer}
                           className="hover:cursor-pointer"
                         >
-                          {answer}
+                          {
+                            parser.parseFromString(
+                              decodeURIComponent(answer),
+                              "text/html"
+                            ).body.textContent
+                          }
                         </label>
                       </div>
                     );
