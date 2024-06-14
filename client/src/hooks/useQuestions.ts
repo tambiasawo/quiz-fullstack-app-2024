@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 
-
 export interface Question {
   id: string;
   question: string;
@@ -28,7 +27,9 @@ const getQuizQuestions = async (quiz_type: string) => {
 const useGetQuestions = (quiz_type: string | undefined) => {
   const { data, isFetching, error, isPending } = useQuery({
     queryKey: ["questions"],
-    staleTime: 60 * 1000 * 10,
+    //staleTime: 60 * 1000 * 5,
+    refetchInterval: false,
+    refetchOnWindowFocus: false,
     queryFn: () => getQuizQuestions(quiz_type as string),
   });
 
