@@ -124,11 +124,7 @@ const DataTable = ({ rows, columns, isLoading }: Props) => {
         //pageSizeOptions={[10]}
 
         slots={{
-          noRowsOverlay: () => (
-            <Stack height="100%" alignItems="center" justifyContent="center">
-              No rows in DataGrid
-            </Stack>
-          ),
+          noRowsOverlay: CustomNoRowsOverlay,
         }}
       />
     </Box>
