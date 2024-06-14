@@ -13,11 +13,9 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 700,
-  color: "black",
-  bgcolor: "background.paper",
+  color: "white",
+  bgcolor: "#37373e",
   borderRadius: "10px",
-  /* height: "90%",
-  overflowY: "scroll", */
   p: 4,
 };
 
@@ -32,6 +30,7 @@ const ScoreBreakdownModal = ({
   quizData: any;
   isFetching: boolean;
 }) => {
+  const percentScore = (quizData.score / quizData.questionCount) * 100;
   if (isFetching) {
     return (
       <Skeleton
@@ -50,17 +49,19 @@ const ScoreBreakdownModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={{ ...style }}>
-        <h2 className="text-3xl text-black text-center">Score Breakdown</h2>
+        <h2 className="text-3xl text-white text-center">Score Breakdown</h2>
         <div className="flex text-xl justify-between items-center gap-5">
           <span> Category: Any </span>
-          <span>
-            Score: {(quizData.score / quizData.questionCount) * 100}%{" "}
+          <span
+            className={percentScore < 50 ? `text-red-500` : "text-green-500"}
+          >
+            Score: {percentScore}%{" "}
           </span>
         </div>
         <ol className="space-y-4 h-[75vh] overflow-y-auto">
           {quizData.quizMarks?.map((mark: Mark) => {
             return (
-              <li key={mark.id}>
+              <li key={mark.id} className="pb-3">
                 <p style={{ display: "ruby-text", paddingBottom: "7px" }}>
                   Question: {mark.question}
                   {"  "}
