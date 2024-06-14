@@ -6,7 +6,7 @@ export const SignInController = async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
-    const foundUser = await User.findOne({ username });
+    const foundUser: any = await User.findOne({ username });
     if (!foundUser) {
       return res.status(404).json({
         message: "Incorrect credentials",
@@ -77,7 +77,7 @@ export const SignUpController = async (req, res, next) => {
       password: hashedPassword,
       name,
     });
-    const newUser = await User.create(user);
+    const newUser: any = await User.create(user);
 
     const token = jwt.sign(
       { id: newUser._id },
