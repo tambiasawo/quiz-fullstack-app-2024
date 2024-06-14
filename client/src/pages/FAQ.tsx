@@ -2,7 +2,7 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import { MdExpandMore, MdExpandLess } from "react-icons/md";
+import { MdExpandMore } from "react-icons/md";
 
 export default function AccordionExpandDefault() {
   return (
