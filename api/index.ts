@@ -26,6 +26,8 @@ app.use(`/api`, mainRouter);
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+/* app.listen(PORT, () => {
   console.log("listening on port " + PORT);
-});
+}); */
+
+export default app;
