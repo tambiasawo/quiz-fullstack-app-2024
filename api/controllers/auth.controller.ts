@@ -58,7 +58,6 @@ export const SignOutController = (req, res, next) => {
 
 export const SignUpController = async (req, res, next) => {
   const { username, company, email, password: userPassword, name } = req.body;
-  console.log(username, company, email, userPassword);
 
   try {
     const existingUser = await User.findOne({ email });
