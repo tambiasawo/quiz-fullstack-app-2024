@@ -38,9 +38,7 @@ const saveQuizScore = async (params: Params | any) => {
 
 const getScores = async (_id: string) => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/scores/get-scores/${_id}`
-    );
+    const response = await fetch(`/api/scores/get-scores/${_id}`);
     const responseData = await response.json();
     return responseData;
   } catch (err) {
@@ -50,9 +48,7 @@ const getScores = async (_id: string) => {
 
 const getTopScores = async () => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/scores/get-top-scores/`
-    );
+    const response = await fetch(`/api/scores/get-top-scores/`);
     const responseData = await response.json();
     return responseData;
   } catch (err) {

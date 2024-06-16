@@ -3,7 +3,7 @@ import { Marks } from "../components/QuizInterface";
 
 const saveMarks = async (params: { marks: Marks[]; marksId: string }) => {
   try {
-    await fetch(`http://localhost:3000/api/marks/save-marks`, {
+    await fetch(`/api/marks/save-marks`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(params),
@@ -15,9 +15,7 @@ const saveMarks = async (params: { marks: Marks[]; marksId: string }) => {
 
 const getMark = async (id: string) => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/marks/get-mark/${id}`
-    );
+    const response = await fetch(`/api/marks/get-mark/${id}`);
     const responseData = await response.json();
     if (responseData.success) return responseData.results[0].marks;
     return responseData.results;

@@ -12,9 +12,7 @@ export interface Question {
 
 const getQuizQuestions = async (quiz_type: string) => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/api/quiz/?${quiz_type}`
-    );
+    const response = await fetch(`/api/quiz/?${quiz_type}`);
     const responseData = await response.json();
 
     return responseData.data;
