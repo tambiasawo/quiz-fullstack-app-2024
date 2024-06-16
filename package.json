@@ -15,7 +15,6 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/cookie-parser": "^1.4.7",
     "@types/jsonwebtoken": "^9.0.6",
-    "@types/redux-persist": "^4.3.1",
     "dotenv": "^16.4.5",
     "i": "^0.3.7",
     "npm": "^10.8.1",
