@@ -147,7 +147,7 @@ const QuizInterface = ({
                         )
                       }
                       checked={answeredQuestions.some(
-                        (q) =>
+                        (q: { id: string; answer: string; question: string }) =>
                           q.id === question.id &&
                           q.answer === answer &&
                           q.question === question.question
