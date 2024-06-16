@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx watch api/index.ts",
+    "start": "tsx api/index.ts",
     "build": "npm install && npm install --prefix client"
   },
   "author": "Tambi <tambi.asawo@yahoo.com> (https://tambiasawo.com/)",
@@ -18,6 +19,7 @@
     "dotenv": "^16.4.5",
     "i": "^0.3.7",
     "npm": "^10.8.1",
+    "ts-node": "^10.9.2",
     "tsx": "^4.11.0",
     "typescript": "^5.4.5"
   },
