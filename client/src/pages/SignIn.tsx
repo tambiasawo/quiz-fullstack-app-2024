@@ -111,16 +111,6 @@ export const SignIn = () => {
           {loading ? "Signing In" : "Sign In"}
         </button>
 
-        <button className="text-center bg-[#fe9d73] rounded-xl py-2 text-lg hover:opacity-[.9]">
-          <span className="flex text-black items-center justify-center gap-3">
-            Continue With Google{" "}
-            <img
-              src="/assets/google.svg"
-              alt="google sign in"
-              className="w-6 h-6"
-            />
-          </span>
-        </button>
         <span className="text-center text-black">
           Don't Have an Account?{" "}
           <Link to="/sign-up" className="underline cursor-pointer">
