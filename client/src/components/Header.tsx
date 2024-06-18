@@ -68,9 +68,11 @@ const Header = () => {
             </span>
           </div>
           <div className="flex flex-col justify-center items-center w-full">
-            <Link to="/">
-              <img src="/assets/logo.png" alt="logo" className="" />
-            </Link>
+            <img
+              src="/assets/logo.png"
+              alt="logo"
+              onClick={() => handleClick("/")}
+            />
             <ul className="mt-5">
               {navItems.map((navItem) => (
                 <li
