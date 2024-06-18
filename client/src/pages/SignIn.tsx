@@ -14,8 +14,8 @@ export const SignIn = () => {
 
   const [viewPassword, setViewPassword] = React.useState(false);
   const [userInfo, setUserInfo] = React.useState({
-    username: "",
-    password: "",
+    username: "john",
+    password: "john",
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +38,6 @@ export const SignIn = () => {
         },
       });
       const data = await response.json();
-      console.log(data);
 
       if (data.user && data.success) {
         dispatch(signIn(data.user));
@@ -70,6 +69,7 @@ export const SignIn = () => {
             name="username"
             onChange={handleChange}
             placeholder="Username"
+            defaultValue={"john"}
             className="form-control-sign-in w-full text-black"
             onFocus={() =>
               setEmailIconColor((prev) => {
@@ -92,6 +92,7 @@ export const SignIn = () => {
             placeholder="Password"
             onChange={handleChange}
             className="form-control-sign-in w-full text-black"
+            defaultValue={"john"}
             onFocus={() =>
               setPasswordIconColor((prev) => {
                 if (prev) return "";
@@ -107,8 +108,11 @@ export const SignIn = () => {
             onClick={() => setViewPassword((prev) => !prev)}
           />
         </span>
-        <button className="text-black text-center bg-[#fe9d73] rounded-xl py-2 text-lg hover:opacity-[.9]">
-          {loading ? "Signing In" : "Sign In"}
+        <button
+          className="text-black text-center bg-[#fe9d73] rounded-xl py-2 text-lg hover:opacity-[.9]"
+          disabled={loading}
+        >
+          {loading ? "Signing In..." : "Sign In"}
         </button>
 
         <span className="text-center text-black">
