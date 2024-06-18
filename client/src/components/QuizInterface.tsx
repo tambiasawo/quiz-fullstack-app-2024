@@ -119,12 +119,13 @@ const QuizInterface = ({
       />
     );
   }
-
   return totalScore === undefined ? (
     <div className="rounded-lg px-3 pt-7 pb-3 bg-[#37373e] text-white ">
-      {error
-        ? "Something unexpected happened."
-        : data.map((question, index) => (
+      {error ? (
+        <p className="text-center">{error.message}</p>
+      ) : (
+        <>
+          {data.map((question, index) => (
             <div className="mb-7" key={question.id}>
               <h2 className="text-lg">
                 {data.length * page -
@@ -174,38 +175,40 @@ const QuizInterface = ({
             </div>
           ))}
 
-      <div className="flex flex-row-reverse justify-between items-start">
-        <div className="pt-5 pb-3 space-x-3">
-          {page > 1 && (
-            <button
-              onClick={prevPageHandler}
-              className="text-center bg-[#fe9d73] rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black disabled:bg-[#b8907e]"
-              disabled={page === 1}
-            >
-              Prev
-            </button>
-          )}{" "}
-          {!(page * 5 === count) && (
-            <button
-              onClick={nextPageHandler}
-              className="text-center disabled:bg-[#b8907e] bg-[#fe9d73] rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
-            >
-              Next
-            </button>
-          )}
-        </div>
-        <div className="pt-5 pb-3">
-          {page * 5 === count && (
-            <button
-              onClick={handleSubmitQuiz}
-              className="text-center bg-[#fe9d73] disabled:bg-gray-400 disabled:cursor-not-allowed rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
-              disabled={questionsAnsweredCount !== count}
-            >
-              Submit
-            </button>
-          )}
-        </div>
-      </div>
+          <div className="flex flex-row-reverse justify-between items-start">
+            <div className="pt-5 pb-3 space-x-3">
+              {page > 1 && (
+                <button
+                  onClick={prevPageHandler}
+                  className="text-center bg-[#fe9d73] rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black disabled:bg-[#b8907e]"
+                  disabled={page === 1}
+                >
+                  Prev
+                </button>
+              )}{" "}
+              {!(page * 5 === count) && (
+                <button
+                  onClick={nextPageHandler}
+                  className="text-center disabled:bg-[#b8907e] bg-[#fe9d73] rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
+                >
+                  Next
+                </button>
+              )}
+            </div>
+            <div className="pt-5 pb-3">
+              {page * 5 === count && (
+                <button
+                  onClick={handleSubmitQuiz}
+                  className="text-center bg-[#fe9d73] disabled:bg-gray-400 disabled:cursor-not-allowed rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
+                  disabled={questionsAnsweredCount !== count}
+                >
+                  Submit
+                </button>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   ) : (
     <QuizResult score={totalScore} questionsCount={totalQuestionsCount} />

@@ -14,11 +14,12 @@ const getQuizQuestions = async (quiz_type: string) => {
   try {
     const response = await fetch(`/api/quiz/?${quiz_type}`);
     const responseData = await response.json();
-
+    if (!responseData.success) {
+      throw new Error("Could not fetch questions. Please try again");
+    }
     return responseData.data;
   } catch (err) {
-    console.log(err);
-    return err;
+    throw new Error("Could not fetch questions. Please try again");
   }
 };
 
@@ -30,7 +31,6 @@ const useGetQuestions = (quiz_type: string | undefined) => {
     refetchOnWindowFocus: false,
     queryFn: () => getQuizQuestions(quiz_type as string),
   });
-
   return { data, isFetching, error, isPending };
 };
 
