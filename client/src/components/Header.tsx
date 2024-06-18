@@ -5,7 +5,7 @@ import { navItems } from "./Navbar";
 import { IoCloseOutline, IoLogOutOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signOut } from "../store/features/auth/authSlice";
 import { useDispatch } from "react-redux";
 import Tooltip from "@mui/material/Tooltip";
@@ -15,6 +15,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const getHeader = () => {
     if (pathname === "/") return "Dashboard";
@@ -28,6 +29,10 @@ const Header = () => {
     return pathname[1].toLocaleUpperCase() + pathname.substring(2);
   };
 
+  const handleClick = (path: string) => {
+    setOpen(false);
+    navigate(path);
+  };
   const handleSignOut = async () => {
     try {
       const response = await fetch("/api/auth/signout");
@@ -70,7 +75,10 @@ const Header = () => {
                   key={navItem.title}
                   className="py-3 px-20 hover:opacity-80 cursor-pointer hover:text-white hover:bg-[#37373e] mb-2 rounded-lg"
                 >
-                  <span className="flex gap-4 items-center ">
+                  <span
+                    className="flex gap-4 items-center "
+                    onClick={() => handleClick(navItem.path)}
+                  >
                     <navItem.icon />{" "}
                     <h3 className="text-lg ">{navItem.title}</h3>
                   </span>
