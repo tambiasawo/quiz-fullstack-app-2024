@@ -23,13 +23,13 @@ const QuizBox = ({
       />
       <h2 className="text-xl text-white font-semibold">{category}</h2>
       <div className="flex flex-col gap-4 max-w-sm w-full ">
-        <div className="flex items-center justify-center b500 gap-3">
+        <div className="flex items-center justify-center gap-3">
           <label htmlFor="questions length">Number of Questions: </label>
           <input
             type="number"
             name="questions length"
             id="questions length"
-            className="w-full py-1 px-2 rounded-lg outline-none"
+            className="w-full py-1 px-2 rounded-lg outline-none text-black"
             min="5"
             max="50"
             value={amount}
@@ -43,7 +43,7 @@ const QuizBox = ({
             id="difficulty"
             onChange={(e) => setDifficulty(e.target.value)}
             value={difficulty}
-            className="p-1 rounded-lg w-full"
+            className="text-black p-1 rounded-lg w-full"
           >
             <option value="">Any</option>
             <option value="easy">Easy</option>
@@ -56,7 +56,7 @@ const QuizBox = ({
           <select
             name="type"
             id="type"
-            className="p-1 rounded-lg w-full"
+            className="text-black p-1 rounded-lg w-full"
             value={type}
             onChange={(e) => setType(e.target.value)}
           >
