@@ -49,7 +49,7 @@ const ScoreBreakdownModal = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={{ ...style }}>
-        <h2 className="text-3xl text-white text-center">Score Breakdown</h2>
+        <h2 className="text-3xl text-[#a6abff] text-center">Score Breakdown</h2>
         <div className="flex text-xl justify-between items-center gap-5">
           <span> Category: Any </span>
           <span
