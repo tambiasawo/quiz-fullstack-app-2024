@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.use(
   cors({
-    origin: "*",
+    origin: "*",  // this enables your api endpoint to be accessible from any origin. So ur api endpoint in your code should be /api/....
     methods: ["GET", "POST", "PATCH", "DELETE"],
     credentials: true,
   })
