@@ -1,5 +1,5 @@
 import React from "react";
-import { HiOutlineMoon, HiOutlineBell } from "react-icons/hi";
+import { HiOutlineMoon } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { navItems } from "./Navbar";
 import { IoCloseOutline, IoLogOutOutline } from "react-icons/io5";
@@ -93,33 +93,12 @@ const Header = () => {
           </div>
 
           <div className="flex justify-between items-center gap-3 ">
-            {/*   <div
-              className={` w-full hidden md:flex items-center justify-start px-1 rounded-lg ${
-                !hideOutline ? "border-2 border-[#313134]" : ""
-              }`}
-              onFocus={() => {
-                setHideOutline(false);
-              }}
-              onBlur={() => {
-                setHideOutline(true);
-              }}
-            >
-              <HiSearch size={20} className="hidden md:block" />
-              <input
-                type="search"
-                placeholder="Search here..."
-                className="w-full bg-[#242528] rounded-lg py-2 px-3 outline-none hidden md:block"
-              />
-            </div> */}
             <div className="flex items-center justify-between gap-2 md:gap-4 cursor-pointer ">
               <Tooltip title={"Coming Soon"}>
                 <div className="border p-2 rounded-lg border-slate-400">
                   <HiOutlineMoon size={20} className="" />
                 </div>
               </Tooltip>
-              {/*  <div className="border p-2 rounded-lg border-slate-400">
-                <HiOutlineBell size={20} className="" />
-              </div> */}
 
               <Link to="/profile" className="w-10 h-10">
                 <img
