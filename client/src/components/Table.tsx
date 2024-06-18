@@ -108,9 +108,16 @@ const DataTable = ({ rows, columns, isLoading }: Props) => {
             fontWeight: "900",
             color: "#000",
           },
+          ".MuiDataGrid-row": {
+            "&:hover": {
+              backgroundColor: "#fe9d73",
+              color: "#000",
+            },
+          },
         }}
         rows={rows}
         columns={updatedTableColumns}
+        disableRowSelectionOnClick
         initialState={{
           pagination: {
             paginationModel: {
