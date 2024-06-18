@@ -3,10 +3,19 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { scoreColumns, leaderboardColumns } from "../utils/columns";
 import ScoreSummary from "../components/ScoreSummary";
-import { useGetScores, useGetTopScores } from "../hooks/useScores";
+import { Scores, useGetScores, useGetTopScores } from "../hooks/useScores";
 import { GoTasklist } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+
+const categories = [
+  "Any",
+  "Entertainment: Music",
+  "General Knowledge",
+  "Entertainment: Movies",
+  "Science & Nature",
+  "Sports",
+];
 
 const Dashboard = () => {
   const user = useSelector((state: RootState) => state.auth.user);
@@ -17,6 +26,14 @@ const Dashboard = () => {
     data: { results: topScores } = { results: [] },
     isFetching: isFetchingTopScores,
   } = useGetTopScores();
+
+  const recommendedCategories = categories.filter((category) => {
+    const cat = scores.find((score: Scores) => score.category === category);
+    return !cat;
+  });
+
+  const recommendations =
+    recommendedCategories.length > 0 ? recommendedCategories : categories;
 
   return (
     <div>
@@ -55,21 +72,25 @@ const Dashboard = () => {
                 <div className="flex gap-4 items-center">
                   <FaCalendarAlt size={28} className="text-white" />
                   <h2 className=" text-white text-xl">Recommended Quizzes</h2>
-                  <ul>{}</ul>
                 </div>
+                <ul className="flex flex-col pt-5 items-center justify-center">
+                  {recommendations.map((recommendation) => (
+                    <li className="text-white text-lg pb-2">
+                      {recommendation}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
 
             <div className=" grid grid-cols-1 md:grid-cols-2 gap-4 ">
               <div className="col-span-1">
                 <h1 className="text-white text-xl">Results</h1>
-                <div className="bg-[#37373e]">
-                  <Table
-                    columns={scoreColumns}
-                    rows={scores || []}
-                    isLoading={isFetching}
-                  />
-                </div>
+                <Table
+                  columns={scoreColumns}
+                  rows={scores}
+                  isLoading={isFetching}
+                />
               </div>
               <div>
                 <h1 className="text-white text-xl">LeaderBoard</h1>
