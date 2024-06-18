@@ -54,13 +54,11 @@ export const Navbar = () => {
   return (
     <div className="px-3 pt-2 overflow-hidden h-[100vh] relative">
       <div className="flex gap-3 items-center pt-2">
-        <img
-          src="/assets/logo.png"
-          alt="logo"
-          // className="w-14 h-14 object-cover"
-        />
+        <Link to={"/"}>
+          <img src="/assets/logo.png" alt="logo" />{" "}
+        </Link>
       </div>
-      
+
       <ul className="pt-5 list-none m-0">
         {navItems.map((item) => (
           <li
@@ -69,7 +67,8 @@ export const Navbar = () => {
           >
             <Link to={item.path}>
               <span className="flex gap-4 items-center">
-                <item.icon size="23"/> <h3 className="text-md">{item.title}</h3>
+                <item.icon size="23" />{" "}
+                <h3 className="text-md">{item.title}</h3>
               </span>
             </Link>
           </li>
