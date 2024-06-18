@@ -7,12 +7,12 @@ interface ResponseData {
   count: number;
 }
 
-window.addEventListener("beforeunload", function (event) {
+function handleReload(event: { returnValue: string }) {
   const message =
     "Are you sure you want to leave this page? Any unsaved changes will be lost.";
   event.returnValue = message; // Standard
   return message; // For some browsers
-});
+}
 
 import QuizInterface from "../components/QuizInterface";
 const Quiz = () => {
@@ -38,8 +38,14 @@ const Quiz = () => {
   } = useGetQuestions(quiz_type);
 
   const paginatedResults = data.results?.slice((page - 1) * 5, page * 5);
-  console.log("results ", { data });
-  console.log({ page }, (page - 1) * 5, page * 5, { paginatedResults });
+
+  React.useEffect(() => {
+    window.addEventListener("beforeunload", handleReload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleReload);
+    };
+  }, []);
   return (
     <QuizInterface
       responseData={{
