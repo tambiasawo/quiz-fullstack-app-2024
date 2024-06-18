@@ -68,7 +68,9 @@ const Header = () => {
             </span>
           </div>
           <div className="flex flex-col justify-center items-center w-full">
-            <img src="/assets/logo.png" alt="logo" className="" />
+            <Link to="/">
+              <img src="/assets/logo.png" alt="logo" className="" />
+            </Link>
             <ul className="mt-5">
               {navItems.map((navItem) => (
                 <li
