@@ -129,7 +129,13 @@ const Results = () => {
             </div>
           </div>
 
-          {chartType === "bar" ? <BarChart /> : <LineChart />}
+          {scores.length === 0 ? (
+            <h3 className="absolute top-[50%] left-[40%] text-center text-white">No Graphs to Show</h3>
+          ) : chartType === "bar" ? (
+            <BarChart />
+          ) : (
+            <LineChart />
+          )}
         </div>
       </div>
 
