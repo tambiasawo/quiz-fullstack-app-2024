@@ -47,9 +47,8 @@ export const SignInController = async (req, res, next) => {
 };
 
 export const SignOutController = (req, res, next) => {
-  const token = req.cookies.access_token;
-  console.log("here now");
-  if (!token) return;
+  //const token = req.cookies.access_token;
+  //if (!token) return;
   return res
     .clearCookie("access_token")
     .status(201)
