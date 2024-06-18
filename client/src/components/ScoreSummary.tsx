@@ -90,7 +90,7 @@ const ScoreSummary = ({
     return (
       <Skeleton
         variant="rounded"
-        width={650}
+        width={350}
         height={290}
         animation="wave"
         className="mx-auto"

@@ -1,5 +1,4 @@
 import React from "react";
-import { HiOutlineMoon } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { navItems } from "./Navbar";
 import { IoCloseOutline, IoLogOutOutline } from "react-icons/io5";
@@ -8,7 +7,6 @@ import { RootState } from "../store/store";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { signOut } from "../store/features/auth/authSlice";
 import { useDispatch } from "react-redux";
-import Tooltip from "@mui/material/Tooltip";
 
 const Header = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -104,11 +102,11 @@ const Header = () => {
 
           <div className="flex justify-between items-center gap-3 ">
             <div className="flex items-center justify-between gap-2 md:gap-4 cursor-pointer ">
-              <Tooltip title={"Coming Soon"}>
+              {/*   <Tooltip title={"Coming Soon"}>
                 <div className="border p-2 rounded-lg border-slate-400">
                   <HiOutlineMoon size={20} className="" />
                 </div>
-              </Tooltip>
+              </Tooltip> */}
 
               <Link to="/profile" className="w-10 h-10">
                 <img
