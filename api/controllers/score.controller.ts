@@ -71,7 +71,7 @@ export const GetTopScoresController = async (req, res, next) => {
       score: score.score,
       questionsCount: score.questionsCount,
       category: score.category,
-      username: score.userId["username"],
+      username: score.userId?.username,
     }));
 
     const topScorers = mappedScorers.reduce((acc: TopScorers[], userScore) => {
