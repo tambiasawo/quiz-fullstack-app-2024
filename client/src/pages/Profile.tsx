@@ -112,35 +112,35 @@ const Profile = () => {
             type="text"
             id="name"
             placeholder={user?.name}
-            className="bg-slate-50 rounded-lg py-2 px-2 outline-none w-full sm:w-[75%] lg:w-[35%]"
+            className="bg-slate-50 text-black rounded-lg py-2 px-3 outline-none w-full sm:w-[75%] lg:w-[35%]"
             onChange={handleChange}
           />
           <input
             type="username"
             id="username"
             placeholder={user?.username}
-            className="bg-slate-50 rounded-lg py-2 px-2 outline-none w-full sm:w-[75%] lg:w-[35%]"
+            className="bg-slate-50 text-black rounded-lg py-2 px-3 outline-none w-full sm:w-[75%] lg:w-[35%]"
             onChange={handleChange}
           />
           <input
             type="email"
             id="email"
             placeholder={user?.email}
-            className="bg-slate-50 rounded-lg py-2 px-2 outline-none w-full sm:w-[75%] lg:w-[35%]"
+            className="bg-slate-50 text-black rounded-lg py-2 px-3 outline-none w-full sm:w-[75%] lg:w-[35%]"
             onChange={handleChange}
           />
           <input
             type="password"
             id="password"
             placeholder="Password"
-            className="bg-slate-50 rounded-lg py-2 px-2 outline-none w-full sm:w-[75%] lg:w-[35%]"
+            className="bg-slate-50 text-black rounded-lg py-2 px-3 outline-none w-full sm:w-[75%] lg:w-[35%]"
             onChange={handleChange}
           />
           <input
             type="text"
             id="company"
             placeholder={user?.company}
-            className="bg-slate-50 rounded-lg py-2 px-2 outline-none w-full sm:w-[75%] lg:w-[35%]"
+            className="bg-slate-50 text-black rounded-lg py-2 px-3 outline-none w-full sm:w-[75%] lg:w-[35%]"
             onChange={handleChange}
           />
           <button className="bg-[#fe9d73] rounded-lg p-3 w-full sm:w-[75%] lg:w-[35%] disabled:opacity-70 hover:opacity-95 uppercase text-black">
