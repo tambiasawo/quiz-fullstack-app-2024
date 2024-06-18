@@ -8,6 +8,7 @@ import { Question } from "../hooks/useQuestions";
 import { useSaveScore } from "../hooks/useScores";
 import { useSaveMarks } from "../hooks/useMarks";
 import { Skeleton } from "@mui/material";
+import { unstable_usePrompt } from "react-router-dom";
 
 interface ResponseData {
   data: Question[];
@@ -101,6 +102,12 @@ const QuizInterface = ({
     setTotalScore(undefined);
   }, []);
 
+  unstable_usePrompt({
+    message: "Are you sure ? Once you leave, the quiz will end",
+    when: ({ currentLocation, nextLocation }) =>
+      count !== questionsAnsweredCount &&
+      currentLocation.pathname !== nextLocation.pathname,
+  });
   if (isFetching) {
     return (
       <Skeleton
