@@ -20,6 +20,8 @@ const Header = () => {
   const getHeader = () => {
     if (pathname === "/") return "Dashboard";
     if (pathname.includes("quick")) return "Quiz > Quick Quiz";
+    if (pathname.includes("faq")) return "FAQ";
+
     if (pathname.substring(1, 5) === "quiz" && pathname.length > 8) {
       const splittedPathname = pathname.split("/category");
       const ampersandIndex = splittedPathname[1]?.indexOf("&");
