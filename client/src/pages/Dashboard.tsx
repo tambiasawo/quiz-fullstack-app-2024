@@ -50,7 +50,7 @@ const Dashboard = () => {
       </div>
       <div className="grid-cols-1 md:grid md:grid-cols-12 ">
         <div className=" col-span-12 py-3">
-          <main className=" flex flex-col gap-5">
+          <main className=" flex flex-col gap-10">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <ScoreSummary scores={scores} isFetching={isFetching} />{" "}
               <div className="main-box">

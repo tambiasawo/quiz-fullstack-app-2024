@@ -100,6 +100,7 @@ const DataTable = ({ rows, columns, isLoading }: Props) => {
         getRowId={(row) => row._id}
         sx={{
           color: "white",
+          height: "auto",
           ".MuiTablePagination-displayedRows": { color: "white" },
           ".MuiTablePagination-actions": { color: "white" },
           ".MuiDataGrid-columnHeaders": {
