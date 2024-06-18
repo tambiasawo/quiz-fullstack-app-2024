@@ -1,15 +1,18 @@
 import React from "react";
-import { HiSearch, HiOutlineMoon, HiOutlineBell } from "react-icons/hi";
+import { HiOutlineMoon, HiOutlineBell } from "react-icons/hi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { navItems } from "./Navbar";
 import { IoCloseOutline, IoLogOutOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 import { Link, useLocation } from "react-router-dom";
+import { signOut } from "../store/features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import Tooltip from "@mui/material/Tooltip";
 
 const Header = () => {
   const { user } = useSelector((state: RootState) => state.auth);
-
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const { pathname } = useLocation();
 
@@ -25,19 +28,37 @@ const Header = () => {
     return pathname[1].toLocaleUpperCase() + pathname.substring(2);
   };
 
+  const handleSignOut = async () => {
+    try {
+      const response = await fetch("/api/auth/signout");
+      const data = await response.json();
+      if (data.success) {
+        dispatch(signOut());
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="pr-0 bg-[#242528] md:pr-1 sticky z-10 top-0 py-5">
       {open ? (
         <div
           className={`w-full ease-in-out duration-500 transition-transform transform pr-4 ${
-            open ? "translate-x-0" : "translate-x-full"
-          }`}
+            open ? "translate-x-0 " : "translate-x-full"
+          } z-20 fixed top-0 left-0 bg-[#242528]`}
         >
-          <div className="flex justify-between items-center">
-            <span onClick={() => setOpen(false)} className="p-1">
+          <div className="flex justify-between items-center p-3">
+            <span
+              onClick={() => setOpen(false)}
+              className="hover:bg-[#37373e] hover:text-white hover:rounded-full p-1"
+            >
               <IoCloseOutline size={28} className="cursor-pointer" />
             </span>
-            <span className="flex gap-1 items-center">
+            <span
+              className="flex gap-1 items-center hover:bg-[#37373e] hover:text-white hover:rounded-md p-2 cursor-pointer"
+              onClick={handleSignOut}
+            >
               <IoLogOutOutline /> <h3> Logout</h3>
             </span>
           </div>
@@ -47,10 +68,11 @@ const Header = () => {
               {navItems.map((navItem) => (
                 <li
                   key={navItem.title}
-                  className="py-3 px-20  hover:opacity-80 cursor-pointer hover:bg-[#37373e] mb-2 rounded-lg"
+                  className="py-3 px-20 hover:opacity-80 cursor-pointer hover:text-white hover:bg-[#37373e] mb-2 rounded-lg"
                 >
-                  <span className="flex gap-4 items-center">
-                    <navItem.icon /> <h3>{navItem.title}</h3>
+                  <span className="flex gap-4 items-center ">
+                    <navItem.icon />{" "}
+                    <h3 className="text-lg ">{navItem.title}</h3>
                   </span>
                 </li>
               ))}
@@ -60,11 +82,11 @@ const Header = () => {
       ) : (
         <div className="flex justify-between items-center">
           <div className="flex-[30%]">
-            <h1 className="text-2xl font-bold hidden md:block text-white">
+            <h1 className="text-2xl font-bold hidden lg:block text-white">
               {getHeader()}
             </h1>
             <RxHamburgerMenu
-              className="block md:hidden cursor-pointer"
+              className="block lg:hidden cursor-pointer"
               size="28"
               onClick={() => setOpen((prev) => !prev)}
             />
@@ -90,18 +112,14 @@ const Header = () => {
               />
             </div> */}
             <div className="flex items-center justify-between gap-2 md:gap-4 cursor-pointer ">
-              <div className="px-2 rounded-lg block md:hidden">
-                <HiSearch
-                  size={28}
-                  //className={`${!hideOutline ? "border border-slate-400" : ""}`}
-                />
-              </div>
-              <div className="border p-2 rounded-lg border-slate-400">
-                <HiOutlineMoon size={20} className="" />
-              </div>
-              <div className="border p-2 rounded-lg border-slate-400">
+              <Tooltip title={"Coming Soon"}>
+                <div className="border p-2 rounded-lg border-slate-400">
+                  <HiOutlineMoon size={20} className="" />
+                </div>
+              </Tooltip>
+              {/*  <div className="border p-2 rounded-lg border-slate-400">
                 <HiOutlineBell size={20} className="" />
-              </div>
+              </div> */}
 
               <Link to="/profile" className="w-10 h-10">
                 <img
