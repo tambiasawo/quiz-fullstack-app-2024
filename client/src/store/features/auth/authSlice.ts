@@ -28,10 +28,14 @@ export const authSlice = createSlice({
     signOut: (state) => {
       state.user = null;
     },
+
+    update: (state, action: PayloadAction<any>) => {
+      state.user = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { signIn, signOut } = authSlice.actions;
+export const { signIn, signOut, update } = authSlice.actions;
 
 export default authSlice.reducer;
