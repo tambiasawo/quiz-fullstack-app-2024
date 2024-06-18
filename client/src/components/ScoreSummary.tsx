@@ -116,7 +116,7 @@ const ScoreSummary = ({
         </select>
       </div>
       <div className="max-w-lg mx-auto flex flex-col gap-1 items-center">
-        <div className="bg-[#fe9d73]  w-[190px] h-[190px] rounded-full flex justify-center items-center p-3">
+        <div className="bg-[#fe9d73] w-[190px] h-[190px] md:w-[140px] md:h-[140px] lg:w-[190px] lg:h-[190px] rounded-full flex justify-center items-center p-3">
           {displayScore.value >= 0 ? (
             <h1 className="text-black text-6xl text-center ">
               {displayScore.value + "%"}
