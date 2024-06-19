@@ -6,7 +6,7 @@ import ScoreSummary from "../components/ScoreSummary";
 import { Scores, useGetScores, useGetTopScores } from "../hooks/useScores";
 import { GoTasklist } from "react-icons/go";
 import { FaCalendarAlt } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const categories = [
   "Any",
@@ -75,9 +75,11 @@ const Dashboard = () => {
                 </div>
                 <ul className="flex flex-col pt-5 items-center justify-center">
                   {recommendations.map((recommendation) => (
-                    <li className="text-white text-lg pb-2">
-                      {recommendation}
-                    </li>
+                    <Link to={`/quizzes`}>
+                      <li className="text-white text-lg pb-2 hover:underline">
+                        {recommendation}
+                      </li>
+                    </Link>
                   ))}
                 </ul>
               </div>
