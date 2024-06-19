@@ -14,16 +14,11 @@ import ScoreSummary from "../components/ScoreSummary";
 
 import { useGetMark } from "../hooks/useMarks";
 import ScoreBreakdownModal from "../components/ScoreBreakdownModal";
-import { Mark } from "../store/features/question/questionSlice";
 
 interface ModalData {
   category: string;
   score: number;
   questionCount: number;
-}
-interface GetMarkResponse {
-  data: { quizMarks: Mark[] };
-  isFetching: boolean;
 }
 
 interface TableRow {
@@ -48,8 +43,7 @@ const Results = () => {
 
   const { data: { results: scores } = { results: [] }, isFetching } =
     useGetScores(userId);
-  const { data: quizMarks, isFetching: isFetchingMarks }: GetMarkResponse =
-    useGetMark(markId);
+  const { data: quizMarks, isFetching: isFetchingMarks } = useGetMark(markId);
 
   const handleOpen = (
     markId: string,
@@ -95,7 +89,7 @@ const Results = () => {
   const columns = React.useMemo(() => {
     return [...cols, actionColumn];
   }, []);
-
+  console.log({ quizMarks });
   return (
     <div className="space-y-7">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -130,7 +124,9 @@ const Results = () => {
           </div>
 
           {scores.length === 0 ? (
-            <h3 className="absolute top-[50%] left-[40%] text-center text-white">No Graphs to Show</h3>
+            <h3 className="absolute top-[50%] left-[40%] text-center text-white">
+              No Graphs to Show
+            </h3>
           ) : chartType === "bar" ? (
             <BarChart />
           ) : (
@@ -146,8 +142,8 @@ const Results = () => {
         isFetching={isFetchingMarks}
         open={open}
         handleClose={handleClose}
+        marks={quizMarks}
         quizData={{
-          quizMarks,
           score: quizData.current.score,
           category: quizData.current.category,
           questionCount: quizData.current.questionCount,
