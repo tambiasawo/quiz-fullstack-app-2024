@@ -26,7 +26,7 @@ export type ScoreResponseData = {
 };
 const saveQuizScore = async (params: Params | any) => {
   try {
-    await fetch(`http://localhost:3000/api/scores/save-score`, {
+    await fetch(`/api/scores/save-score`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(params),
