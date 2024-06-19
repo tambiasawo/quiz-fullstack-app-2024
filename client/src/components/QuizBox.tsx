@@ -34,7 +34,7 @@ const QuizBox = ({
             value={amount}
             valueLabelDisplay="auto"
             shiftStep={5}
-            onChange={(e: Event, newValue: number | number[]) =>
+            onChange={(_e: Event, newValue: number | number[]) =>
               setAmount(newValue as number)
             }
             step={5}
