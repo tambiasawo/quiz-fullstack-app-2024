@@ -79,35 +79,14 @@ const Profile = () => {
           className="flex justify-center items-center flex-col gap-4"
           onSubmit={handleSubmit}
         >
-          <input
-            type="file"
-            //ref={fileRef}
-            hidden
-            accept="image/*"
-            //onChange={handleImageChange}
-          />
+          <input type="file" hidden accept="image/*" />
 
           <img
             src={user?.profileImage}
             alt="profile image"
-            className="h-24 w-24 rounded-full self-center cursor-pointer object-cover my-3"
-            //onClick={() => fileRef.current.click()}
+            className="h-24 w-24 rounded-full self-center object-cover my-3"
           />
-          {/*   <p className="text-sm self-center">
-            {imageError ? (
-              <span className="text-red-700">
-                Error uploading image (file size must be less than 2 MB)
-              </span>
-            ) : imageUploadProgress > 0 && imageUploadProgress < 100 ? (
-              <span className="text-slate-700">{`Uploading: ${imageUploadProgress} %`}</span>
-            ) : imageUploadProgress === 100 ? (
-              <span className="text-green-700">
-                Image uploaded successfully
-              </span>
-            ) : (
-              ""
-            )}
-          </p> */}
+
           <input
             type="text"
             id="name"
