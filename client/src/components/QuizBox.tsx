@@ -1,3 +1,4 @@
+import Slider from "@mui/material/Slider";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,7 +12,8 @@ const QuizBox = ({
   const navigate = useNavigate();
   const [difficulty, setDifficulty] = React.useState("");
   const [type, setType] = React.useState("");
-  const [amount, setAmount] = React.useState("");
+  const [amount, setAmount] = React.useState(5);
+
   return (
     <div className="main-box flex flex-col items-center justify-center">
       <img
@@ -25,15 +27,20 @@ const QuizBox = ({
       <div className="flex flex-col gap-4 max-w-sm w-full ">
         <div className="flex items-center justify-center gap-3">
           <label htmlFor="questions length">Number of Questions: </label>
-          <input
-            type="number"
-            name="questions length"
-            id="questions length"
-            className="w-full py-1 px-2 rounded-lg outline-none text-black"
-            min="5"
-            max="50"
+
+          <Slider
+            aria-label="questions length"
+            defaultValue={5}
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            valueLabelDisplay="auto"
+            shiftStep={5}
+            onChange={(e: Event, newValue: number | number[]) =>
+              setAmount(newValue as number)
+            }
+            step={5}
+            marks
+            min={5}
+            max={50}
           />
         </div>
         <div className="flex items-center justify-center gap-3">
