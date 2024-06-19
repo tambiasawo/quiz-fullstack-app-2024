@@ -1,10 +1,10 @@
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 
 type Params = {
-  category: string;
-  type: string;
-  difficulty: string;
-  userId: string;
+  category?: string;
+  type?: string;
+  difficulty?: string;
+  userId: string | undefined;
   score: number;
   questionsCount: number;
 };
@@ -24,7 +24,7 @@ export type ScoreResponseData = {
   results: Scores[];
   success: boolean;
 };
-const saveQuizScore = async (params: Params | any) => {
+const saveQuizScore = async (params: Params) => {
   try {
     await fetch(`/api/scores/save-score`, {
       method: "post",
