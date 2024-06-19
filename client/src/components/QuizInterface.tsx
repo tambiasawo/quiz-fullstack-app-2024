@@ -7,7 +7,7 @@ import QuizResult from "./QuizResult";
 import { Question } from "../hooks/useQuestions";
 import { useSaveScore } from "../hooks/useScores";
 import { useSaveMarks } from "../hooks/useMarks";
-import { Skeleton } from "@mui/material";
+import { Skeleton, Tooltip } from "@mui/material";
 import { unstable_usePrompt } from "react-router-dom";
 
 interface ResponseData {
@@ -121,11 +121,16 @@ const QuizInterface = ({
     );
   }
   return totalScore === undefined ? (
-    <div className="rounded-lg px-3 pt-7 pb-3 bg-[#37373e] text-white ">
+    <div className="rounded-lg px-3 pt-3 pb-3 bg-[#37373e] text-white ">
       {error ? (
         <p className="text-center">{error.message}</p>
       ) : (
         <>
+          <div className="flex justify-end text-green-500">
+            <Tooltip title="Coming Soon...">
+              <h2> Timer: 00:00:00</h2>
+            </Tooltip>
+          </div>
           {data.map((question, index) => (
             <div className="mb-7" key={question.id}>
               <h2 className="text-lg">
