@@ -22,11 +22,17 @@ const ScoreBreakdownModal = ({
   open,
   handleClose,
   quizData,
+  marks,
   isFetching,
 }: {
   open: boolean;
-  handleClose: any;
-  quizData: any;
+  handleClose: () => void;
+  marks: Mark[];
+  quizData: {
+    score: number;
+    category: string;
+    questionCount: number;
+  };
   isFetching: boolean;
 }) => {
   const percentScore = (quizData.score / quizData.questionCount) * 100;
@@ -58,7 +64,7 @@ const ScoreBreakdownModal = ({
           </span>
         </div>
         <ol className="space-y-4 h-[75vh] overflow-y-auto">
-          {quizData.quizMarks?.map((mark: Mark) => {
+          {marks?.map((mark: Mark) => {
             return (
               <li key={mark.id} className="pb-3">
                 <p style={{ display: "ruby-text", paddingBottom: "7px" }}>
