@@ -202,15 +202,13 @@ const QuizInterface = ({
               )}
             </div>
             <div className="pt-5 pb-3">
-              {page * 5 === count && (
-                <button
-                  onClick={handleSubmitQuiz}
-                  className="text-center bg-[#fe9d73] disabled:bg-gray-400 disabled:cursor-not-allowed rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
-                  disabled={questionsAnsweredCount !== count}
-                >
-                  Submit
-                </button>
-              )}
+              <button
+                onClick={handleSubmitQuiz}
+                className="text-center bg-[#fe9d73] disabled:bg-gray-400 disabled:cursor-not-allowed rounded-xl px-4 py-1 text-md hover:opacity-[.9] text-black"
+                disabled={questionsAnsweredCount !== count}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </>
