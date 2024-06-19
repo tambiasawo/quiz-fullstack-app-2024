@@ -118,7 +118,6 @@ export const SignIn = () => {
         <span className="text-center text-black">
           Don't Have an Account?{" "}
           <Link to="/sign-up" className="underline cursor-pointer">
-            {" "}
             Sign up
           </Link>
         </span>
