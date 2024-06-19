@@ -12,7 +12,6 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 700,
   color: "white",
   bgcolor: "#37373e",
   borderRadius: "10px",
@@ -48,7 +47,7 @@ const ScoreBreakdownModal = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style }}>
+      <Box sx={{ ...style }} className="w-[400px] md:w-[700px]">
         <h2 className="text-3xl text-[#a6abff] text-center">Score Breakdown</h2>
         <div className="flex text-xl justify-between items-center gap-5">
           <span> Category: Any </span>
