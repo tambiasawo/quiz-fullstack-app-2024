@@ -106,6 +106,7 @@ const QuizInterface = ({
     message: "Are you sure ? Once you leave, the quiz will end",
     when: ({ currentLocation, nextLocation }) =>
       count !== questionsAnsweredCount &&
+      totalScore === undefined &&
       currentLocation.pathname !== nextLocation.pathname,
   });
   if (isFetching) {
@@ -138,8 +139,8 @@ const QuizInterface = ({
                   ).body.textContent}
               </h2>
               <div className="px-4">
-                {question.answers.map((answer) => (
-                  <div className="space-x-3 hover:text-[#fe9d73] " key={answer}>
+                {question.answers.map((answer, index) => (
+                  <div className="space-x-3 hover:text-[#fe9d73] " key={index}>
                     <input
                       type="radio"
                       id={answer}
