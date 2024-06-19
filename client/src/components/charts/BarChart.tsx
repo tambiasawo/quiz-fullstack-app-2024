@@ -58,41 +58,46 @@ function BarChart() {
     <>
       {success ? (
         <ResponsiveContainer width="100%" height="100%">
-          <Chart
-            width={700}
-            height={300}
-            data={groupedData}
-            margin={{
-              top: 35,
-              right: 30,
-              left: 0,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Legend />
-            <Tooltip />
-            <Bar
-              dataKey="Attempt 1"
-              fill="#8884d8"
-              barSize={"2%"}
-              activeBar={<Rectangle fill="#fe9d73" stroke="" />}
-            />
-            <Bar
-              dataKey="Attempt 2"
-              fill="#8884d8"
-              barSize={"2%"}
-              activeBar={<Rectangle fill="#fe9d73" stroke="" />}
-            />
-            <Bar
-              dataKey="Attempt 3"
-              fill="#8884d8"
-              barSize={"2%"}
-              activeBar={<Rectangle fill="#fe9d73" stroke="" />}
-            />
-          </Chart>
+          <>
+            <h1 className="text-center ">
+              Showing Only The Last 3 Attempts Per Category
+            </h1>
+            <Chart
+              width={700}
+              height={300}
+              data={groupedData}
+              margin={{
+                top: 25,
+                right: 30,
+                left: 0,
+                bottom: 10,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Legend />
+              <Tooltip />
+              <Bar
+                dataKey="Attempt 1"
+                fill="#8884d8"
+                barSize={"2%"}
+                activeBar={<Rectangle fill="#fe9d73" stroke="" />}
+              />
+              <Bar
+                dataKey="Attempt 2"
+                fill="#8884d8"
+                barSize={"2%"}
+                activeBar={<Rectangle fill="#fe9d73" stroke="" />}
+              />
+              <Bar
+                dataKey="Attempt 3"
+                fill="#8884d8"
+                barSize={"2%"}
+                activeBar={<Rectangle fill="#fe9d73" stroke="" />}
+              />
+            </Chart>
+          </>
         </ResponsiveContainer>
       ) : (
         <p className="text-center mx-auto">
