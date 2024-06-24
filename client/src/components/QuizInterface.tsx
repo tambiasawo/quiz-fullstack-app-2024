@@ -167,7 +167,10 @@ const QuizInterface = ({
                           q.question === question.question
                       )}
                     />{" "}
-                    <label htmlFor={answer} className="hover:cursor-pointer">
+                    <label
+                      htmlFor={`${question.id}-${index}`}
+                      className="hover:cursor-pointer"
+                    >
                       {
                         parser.parseFromString(
                           decodeURIComponent(answer),
