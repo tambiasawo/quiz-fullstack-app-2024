@@ -3,6 +3,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import Modal from "@mui/material/Modal";
 import { Box, Skeleton } from "@mui/material";
 import { Mark } from "../store/features/question/questionSlice";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const style = {
   display: "flex",
@@ -53,7 +54,10 @@ const ScoreBreakdownModal = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style }} className="w-[400px] md:w-[700px]">
+      <Box sx={{ ...style }} className="w-[350px] md:w-[700px] relative">
+        <span className="absolute top-2 right-2 md:hidden">
+          <IoIosCloseCircleOutline size={25} onClick={handleClose} />
+        </span>
         <h2 className="text-3xl text-[#a6abff] text-center">Score Breakdown</h2>
         <div className="flex text-xl justify-between items-center gap-5">
           <span> Category: Any </span>
