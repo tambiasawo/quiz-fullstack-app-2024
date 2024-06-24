@@ -125,7 +125,7 @@ const QuizInterface = ({
         <p className="text-center">{error.message}</p>
       ) : (
         <>
-          <div className="flex justify-end text-green-500">
+          <div className="justify-end text-slate-400 hidden md:flex">
             <Tooltip title="Coming Soon...">
               <h2> Timer: 00:00:00</h2>
             </Tooltip>
