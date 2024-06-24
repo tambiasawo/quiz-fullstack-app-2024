@@ -105,7 +105,6 @@ const QuizInterface = ({
   unstable_usePrompt({
     message: "Are you sure ? Once you leave, the quiz will end",
     when: ({ currentLocation, nextLocation }) =>
-      count !== questionsAnsweredCount &&
       totalScore === undefined &&
       currentLocation.pathname !== nextLocation.pathname,
   });
