@@ -148,7 +148,7 @@ const QuizInterface = ({
                   <div className="space-x-3 hover:text-[#fe9d73] " key={index}>
                     <input
                       type="radio"
-                      id={answer}
+                      id={`${question.id}-${index}`}
                       name={question.id}
                       value={answer}
                       className="hover:cursor-pointer"
