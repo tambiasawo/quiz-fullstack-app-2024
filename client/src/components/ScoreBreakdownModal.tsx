@@ -54,7 +54,10 @@ const ScoreBreakdownModal = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style }} className="w-[350px] md:w-[700px] relative">
+      <Box
+        sx={{ ...style }}
+        className="w-[350px] md:w-[700px] h-[650px] md:h-[700px] relative"
+      >
         <span className="absolute top-2 right-2 md:hidden">
           <IoIosCloseCircleOutline size={25} onClick={handleClose} />
         </span>
