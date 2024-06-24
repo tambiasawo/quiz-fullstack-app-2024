@@ -87,13 +87,13 @@ function BarChart() {
                 />
                 <Bar
                   dataKey="Attempt 2"
-                  fill="#8884d8"
+                  fill="#82ca9d"
                   barSize={"2%"}
                   activeBar={<Rectangle fill="#fe9d73" stroke="" />}
                 />
                 <Bar
                   dataKey="Attempt 3"
-                  fill="#8884d8"
+                  fill="#ffc658"
                   barSize={"2%"}
                   activeBar={<Rectangle fill="#fe9d73" stroke="" />}
                 />
