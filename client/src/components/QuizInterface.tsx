@@ -7,8 +7,9 @@ import QuizResult from "./QuizResult";
 import { Question } from "../hooks/useQuestions";
 import { useSaveScore } from "../hooks/useScores";
 import { useSaveMarks } from "../hooks/useMarks";
-import { Skeleton, Tooltip } from "@mui/material";
+import { Skeleton } from "@mui/material";
 import { unstable_usePrompt } from "react-router-dom";
+import Timer from "./Timer";
 
 interface ResponseData {
   data: Question[];
@@ -48,6 +49,8 @@ const QuizInterface = ({
   const [totalScore, setTotalScore] = React.useState<number | undefined>(
     undefined
   );
+  const [timeUp, setTimeUp] = React.useState(false);
+  let duration = (count + 10) * 60 * 1000;
 
   const { mutation: saveScore } = useSaveScore();
   const { mutation: saveMarks } = useSaveMarks();
@@ -62,11 +65,14 @@ const QuizInterface = ({
     dispatch(chooseAnswer({ id, question, answer, correctAnswer }));
   };
 
-  const handleSubmitQuiz = async () => {
-    if (count !== questionsAnsweredCount) {
-      return;
+  const handleTimeUp = React.useCallback(() => {
+    if (!timeUp) {
+      handleSubmitQuiz();
+      setTimeUp(true);
     }
+  }, [timeUp]);
 
+  const handleSubmitQuiz = async () => {
     let scoreCount = 0;
     const marksId = uuidv4();
 
@@ -75,7 +81,6 @@ const QuizInterface = ({
         scoreCount++;
       }
     }
-
     const requestBody = {
       ...(urlParams === "quick-quiz"
         ? { category: "Any", type: "Any", difficulty: "Any" }
@@ -91,8 +96,8 @@ const QuizInterface = ({
     };
 
     await saveScore.mutateAsync(requestBody);
-    await saveMarks.mutateAsync({ marks: answeredQuestions, marksId });
 
+    await saveMarks.mutateAsync({ marks: answeredQuestions, marksId });
     setTotalScore(scoreCount);
     dispatch(reset());
   };
@@ -100,7 +105,7 @@ const QuizInterface = ({
   React.useEffect(() => {
     dispatch(reset());
     setTotalScore(undefined);
-  }, []);
+  }, [dispatch]);
 
   unstable_usePrompt({
     message: "Are you sure ? Once you leave, the quiz will end",
@@ -108,6 +113,7 @@ const QuizInterface = ({
       totalScore === undefined &&
       currentLocation.pathname !== nextLocation.pathname,
   });
+
   if (isFetching) {
     return (
       <Skeleton
@@ -119,6 +125,7 @@ const QuizInterface = ({
       />
     );
   }
+
   return totalScore === undefined ? (
     <div className="rounded-lg px-3 pt-3 pb-3 bg-[#37373e] text-white ">
       {error ? (
@@ -126,9 +133,7 @@ const QuizInterface = ({
       ) : (
         <>
           <div className="justify-end text-slate-400 hidden md:flex">
-            <Tooltip title="Coming Soon...">
-              <h2> Timer: 00:00:00</h2>
-            </Tooltip>
+            <Timer timeInMilliseconds={duration} onTimeUp={handleTimeUp} />
           </div>
           {data.map((question, index) => (
             <div className="mb-7" key={question.id}>
