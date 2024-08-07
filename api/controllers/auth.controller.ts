@@ -55,11 +55,13 @@ export const SignUpController = async (req, res, next) => {
   const { username, company, email, password: userPassword, name } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    const existingUser = await User.findOne({ username });
+    const existingEmail = await User.findOne({ email });
+
+    if (existingUser || existingEmail) {
       return res.status(404).json({
         success: false,
-        message: "Unable to create a user. Please try again",
+        message: "Unable to create this user. Please try again",
       });
     }
 
