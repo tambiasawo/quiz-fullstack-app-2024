@@ -25,7 +25,7 @@ export const scoreColumns: GridColDef[] = [
     minWidth: 170,
     align: "center",
     valueGetter: (params) =>
-      (params.row.score / params.row.questionsCount) * 100,
+      Math.floor((params.row.score / params.row.questionsCount) * 100),
   },
   {
     field: "status",
