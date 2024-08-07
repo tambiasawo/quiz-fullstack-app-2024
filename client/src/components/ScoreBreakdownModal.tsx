@@ -66,7 +66,7 @@ const ScoreBreakdownModal = ({
         </span>
         <h2 className="text-3xl text-[#a6abff] text-center">Score Breakdown</h2>
         <div className="flex text-xl justify-between items-center gap-5">
-          <span> Category: Any </span>
+          <span> Category: {quizData.category} </span>
           <span
             className={percentScore < 50 ? `text-red-500` : "text-green-500"}
           >
