@@ -41,5 +41,10 @@ export const scoreColumns: GridColDef[] = [
 export const leaderboardColumns: GridColDef[] = [
   { field: "username", headerName: "Username", minWidth: 200 },
   { field: "category", headerName: "Category", minWidth: 200 },
-  { field: "score", headerName: "Score", minWidth: 120 },
+  {
+    field: "score",
+    headerName: "Score (%)",
+    minWidth: 120,
+    valueGetter: (params) => Math.floor(params.row.score),
+  },
 ];
