@@ -36,7 +36,10 @@ const ScoreBreakdownModal = ({
   };
   isFetching: boolean;
 }) => {
-  const percentScore = (quizData.score / quizData.questionCount) * 100;
+  const percentScore = Math.floor(
+    (quizData.score / quizData.questionCount) * 100
+  );
+
   if (isFetching) {
     return (
       <Skeleton
