@@ -70,7 +70,7 @@ const ScoreBreakdownModal = ({
           <span
             className={percentScore < 50 ? `text-red-500` : "text-green-500"}
           >
-            Score: {percentScore}%{" "}
+            Score: {percentScore}%
           </span>
         </div>
         <ol className="space-y-4 h-[75vh] overflow-y-auto">
