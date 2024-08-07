@@ -19,27 +19,25 @@ export const SignInController = async (req, res, next) => {
     );
 
     if (!checkPassword) {
-      if (password !== foundUser.password) {
-        return res.status(404).json({
-          message: "Incorrect credentials",
-          success: false,
-        });
-      } else {
-        const expiryTime = new Date(Date.now() + 3600000);
+      return res.status(404).json({
+        message: "Incorrect credentials",
+        success: false,
+      });
+    } else {
+      const expiryTime = new Date(Date.now() + 3600000);
 
-        const token = jwt.sign(
-          { id: foundUser._id },
-          process.env.PRIVATE_KEY as string
-        );
-        const { password, ...rest } = foundUser._doc;
-        return res
-          .cookie("access_token", token, {
-            httpOnly: true,
-            expires: expiryTime,
-          })
-          .status(200)
-          .json({ success: true, user: rest });
-      }
+      const token = jwt.sign(
+        { id: foundUser._id },
+        process.env.PRIVATE_KEY as string
+      );
+      const { password, ...rest } = foundUser._doc;
+      return res
+        .cookie("access_token", token, {
+          httpOnly: true,
+          expires: expiryTime,
+        })
+        .status(200)
+        .json({ success: true, user: rest });
     }
   } catch (err) {
     next(err);
@@ -47,8 +45,6 @@ export const SignInController = async (req, res, next) => {
 };
 
 export const SignOutController = (req, res, next) => {
-  //const token = req.cookies.access_token;
-  //if (!token) return;
   return res
     .clearCookie("access_token")
     .status(201)
