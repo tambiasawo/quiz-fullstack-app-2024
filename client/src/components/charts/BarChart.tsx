@@ -28,14 +28,15 @@ function BarChart() {
       const { score, questionsCount, category } = curr;
       const itemToInsert = {
         name: category,
-        "Attempt 1": (score / questionsCount) * 100,
+        "Attempt 1": `${Math.floor((score / questionsCount) * 100)}`,
       };
       const existingObjIndex = acc.findIndex(
         (item) => item.name === itemToInsert.name
       );
       if (existingObjIndex !== -1) {
-        acc[existingObjIndex][`Attempt ${count}`] =
-          (score / questionsCount) * 100;
+        acc[existingObjIndex][`Attempt ${count}`] = Math.floor(
+          (score / questionsCount) * 100
+        );
         count++;
       } else {
         acc.push(itemToInsert);
