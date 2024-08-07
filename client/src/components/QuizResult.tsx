@@ -13,7 +13,7 @@ const QuizResult = ({
     <div className="flex flex-col gap-4 mx-auto max-w-lg mt-20 text-white  bg-[#37373e] rounded-lg px-7 py-7">
       <h1 className="text-2xl font-semibold text-center">You Scored</h1>
       <h1 className="text-7xl font-semibold text-center">
-        {(score / questionsCount) * 100}%
+        {Math.floor((score / questionsCount) * 100)}%
       </h1>
       <div className="flex justify-between gap-3 items-center mt-10">
         <span className="flex gap-4">
