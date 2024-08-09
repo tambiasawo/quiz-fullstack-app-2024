@@ -86,7 +86,7 @@ const ScoreSummary = ({
           date: dateFormatter(worstScore.createdAt as string) || "--",
         };
 
-  if (isFetching) {
+  /*   if (isFetching) {
     return (
       <Skeleton
         variant="rounded"
@@ -96,7 +96,7 @@ const ScoreSummary = ({
         className="mx-auto"
       />
     );
-  }
+  } */
   return (
     <div className="main-box bg-[#a6abff]  gap-[30px]">
       <div className="flex gap-2 items-center">
