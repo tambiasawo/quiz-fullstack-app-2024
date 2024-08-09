@@ -37,11 +37,16 @@ function LineChart() {
       const existingObjIndex = acc?.findIndex(
         (item) => item.name === formattedDate
       );
+      const existingObjIndexWithDate = acc?.findIndex(
+        (item) => item.name === formattedDateWithTIme
+      );
       if (existingObjIndex !== -1) {
-        acc.push({
-          name: formattedDateWithTIme,
-          Score: (score / questionsCount) * 100,
-        });
+        if (existingObjIndexWithDate === -1) {
+          acc.push({
+            name: formattedDateWithTIme,
+            Score: (score / questionsCount) * 100,
+          });
+        }
       } else {
         acc.push({
           name: formattedDate,
