@@ -1,7 +1,7 @@
 import React from "react";
 import dateFormatter from "../utils/dateFormatter";
 import { Scores } from "../hooks/useScores";
-import { Skeleton, Tooltip } from "@mui/material";
+import { Tooltip } from "@mui/material";
 
 type ReducedAccParamType = {
   percentValue: number;
@@ -11,7 +11,6 @@ type ReducedAccParamType = {
 
 const ScoreSummary = ({
   scores,
-  isFetching,
 }: {
   scores: Scores[];
   isFetching: boolean;
