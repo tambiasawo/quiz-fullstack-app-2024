@@ -49,7 +49,10 @@ const ScoreSummary = ({
 
   const averageScore = scores?.slice()?.reduce((acc: number, curr: Scores) => {
     const { score, questionsCount } = curr;
-    const percentValue = (score / questionsCount) * 100;
+
+    const percentValue =
+      questionsCount === 0 ? 0 : (score / questionsCount) * 100;
+
     return acc + percentValue;
   }, 0);
 
@@ -59,7 +62,7 @@ const ScoreSummary = ({
       category: scores[0]?.category,
       createdAt: scores[0]?.createdAt,
     } || "--";
-
+    
   const displayScore =
     scoreType === "average"
       ? {
