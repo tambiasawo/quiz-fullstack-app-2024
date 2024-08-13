@@ -75,7 +75,7 @@ const Dashboard = () => {
                 </div>
                 <ul className="flex flex-col pt-5 items-center justify-center">
                   {recommendations.map((recommendation) => (
-                    <Link to={`/quizzes`}>
+                    <Link to={`/quizzes`} key={recommendation}>
                       <li className="text-white text-lg pb-2 hover:underline">
                         {recommendation}
                       </li>
