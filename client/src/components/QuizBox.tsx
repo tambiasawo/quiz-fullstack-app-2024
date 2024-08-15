@@ -18,10 +18,9 @@ const QuizBox = ({
     <div className="main-box flex flex-col items-center justify-center">
       <img
         src={imgUrl}
-        width="300px"
-        height="100px"
         alt="quiz logo"
-        className="rounded-lg object-cover max-w-[50%]"
+        className="rounded-lg object-cover w-[300px] h-[200px] max-w-[50%]"
+        loading="lazy"
       />
       <h2 className="text-xl text-white font-semibold">{category}</h2>
       <div className="flex flex-col gap-4 max-w-sm w-full ">
